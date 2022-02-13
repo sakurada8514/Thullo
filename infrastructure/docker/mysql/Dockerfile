@@ -1,6 +1,6 @@
 FROM mysql/mysql-server:8.0
 
-ENV MYSQL_DATABASE=-thullo-local \
+ENV MYSQL_DATABASE=thullo-local \
   MYSQL_USER=sakusaku \
   MYSQL_PASSWORD=sakusaku \
   MYSQL_ROOT_PASSWORD=sakusaku \
