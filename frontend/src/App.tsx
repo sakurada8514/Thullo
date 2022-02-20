@@ -1,24 +1,17 @@
-import React, { VFC } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Suspense, VFC } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import { AppRouter } from "./routes/AppRouter";
+// import "./index.css";
 
-const App: VFC = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Editeee <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
+export const App: VFC = () => (
+  <React.StrictMode>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Suspense fallback={<div>Loading..</div>}>
+          <AppRouter />
+        </Suspense>
+      </BrowserRouter>
+    </RecoilRoot>
+  </React.StrictMode>
 );
-
-export default App;
