@@ -1,9 +1,0 @@
-server:
-  port: 8080
-# DB接続情報
-spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/thullo-local?serverTimezone=JST
-    username: sakusaku
-    password: sakusaku
