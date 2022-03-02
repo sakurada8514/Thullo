@@ -1,4 +1,4 @@
-package com.example.backend.presentation.security;
+package com.example.backend.presentation.security.config;
 
 import com.example.backend.presentation.security.handler.AccessDeniedHandlerImpl;
 import com.example.backend.presentation.security.handler.AuthenticationEntryPointHandlerImpl;
@@ -8,6 +8,7 @@ import com.example.backend.presentation.security.handler.AuthenticationSuccessHa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -31,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // AUTHORIZE
                 .authorizeRequests()
-                .mvcMatchers("/signin", "/signup")
+                .mvcMatchers("/signin", "/signup", "/csrf-token")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -60,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // CSRF
                 .csrf()
                 .disable()
-        // .ignoringAntMatchers("/login")
-        // .csrfTokenRepository(new CookieCsrfTokenRepository())
+        // .ignoringAntMatchers("/signin", "/signup", "/csrf-token")
+        // .csrfTokenRepository(new CookieCsrfTokenRepository());
         ;
     }
 

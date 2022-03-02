@@ -9,7 +9,7 @@ public class SignInUser extends org.springframework.security.core.userdetails.Us
     private User user;
 
     public User user() {
-        return user;
+        return this.user;
     }
 
     public SignInUser(User user) {

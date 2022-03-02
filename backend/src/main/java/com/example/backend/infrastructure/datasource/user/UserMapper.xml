@@ -21,4 +21,19 @@
             email = #{email}
     </select>
 
+    <insert id="insertUser" parameterType="com.example.backend.domain.model.user.User">
+        INSERT IGNORE INTO users
+        (
+            name
+            ,email
+            ,password
+        )
+        VALUES 
+        (
+            #{name}
+            ,#{email}
+            ,#{password}
+        ) 
+    </insert>
+
 </mapper>
