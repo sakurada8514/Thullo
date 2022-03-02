@@ -21,9 +21,6 @@ public class UserDatasource implements UserRepository {
 
     @Override
     public Boolean creartUser(User user) throws RegisteredException {
-        Boolean createResult = this.userMapper.insertUser(user);
-        if (!createResult)
-            throw new RegisteredException();
-        return createResult;
+        return this.userMapper.insertUser(user);
     }
 }
