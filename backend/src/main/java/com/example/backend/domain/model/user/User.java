@@ -8,6 +8,15 @@ public class User {
     String name;
     String password;
 
+    public User() {
+    }
+
+    public User(String name, String email, String password) {
+        this.email = email;
+        this.name = name;
+        this.password = (new Password(password)).encode();
+    }
+
     public String name() {
         return this.name;
     }
@@ -22,15 +31,6 @@ public class User {
 
     public String email() {
         return this.email;
-    }
-
-    public User() {
-    }
-
-    public User(String name, String email, String password) {
-        this.email = email;
-        this.name = name;
-        this.password = (new BCryptPasswordEncoder()).encode(password);
     }
 
 }

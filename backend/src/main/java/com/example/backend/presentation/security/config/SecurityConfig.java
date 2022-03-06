@@ -7,7 +7,9 @@ import com.example.backend.presentation.security.handler.AuthenticationSuccessHa
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +22,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -30,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // AUTHORIZE
                 .authorizeRequests()
-                .mvcMatchers("/signin", "/signup", "/csrf-token")
+                .mvcMatchers("/signin", "/signup", "/user/authd")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -56,38 +59,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler())
                 // .addLogoutHandler(new CookieClearingLogoutHandler()) 追加のログアウト処理
                 .and()
+                .cors()
+                .and()
                 // CSRF
                 .csrf()
-                .disable()
-        // .ignoringAntMatchers("/signin", "/signup", "/csrf-token")
+                .disable();
+        // .ignoringAntMatchers("/user/authd")
         // .csrfTokenRepository(new CookieCsrfTokenRepository());
-        ;
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth,
-            @Qualifier("SecurityUserDetailsService") UserDetailsService userDetailsService) throws Exception {
+            @Qualifier("SecurityAuthService") UserDetailsService userDetailsService) throws Exception {
         auth.eraseCredentials(true)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
     AuthenticationEntryPoint authenticationEntryPoint() {
         return new AuthenticationEntryPointHandlerImpl();
     }
 
+    @Bean
     AccessDeniedHandler accessDeniedHandler() {
         return new AccessDeniedHandlerImpl();
     }
 
+    @Bean
     AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new AuthenticationSuccessHandlerImpl();
     }
 
+    @Bean
     AuthenticationFailureHandler authenticationFailureHandler() {
         return new AuthenticationFailureHandlerImpl();
     }
 
+    @Bean
     LogoutSuccessHandler logoutSuccessHandler() {
         return new HttpStatusReturningLogoutSuccessHandler();
     }

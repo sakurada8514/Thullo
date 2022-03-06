@@ -6,7 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.backend.common.constant.Error;
+import com.example.backend.presentation.view.response.ErrorResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -17,9 +22,14 @@ public class AuthenticationEntryPointHandlerImpl implements AuthenticationEntryP
             HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
         if (response.isCommitted()) {
-            // log.info("Response has already been committed.");
             return;
         }
-        response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpStatus.FORBIDDEN.value());
+
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(
+                response.getOutputStream(),
+                new ErrorResponse(Error.FORBIDDEN.code(), Error.FORBIDDEN.message()));
     }
 }
