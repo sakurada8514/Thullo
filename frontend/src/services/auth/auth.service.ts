@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { ENDPOINT } from "config/api";
 // eslint-disable-next-line import/no-cycle
 import { apiClient } from "libs/apiClient";
@@ -8,11 +8,8 @@ import { ErrorResponse, SuccessResponse } from "types/api/response";
 
 export const signUp = (
   requestBody: UserSignUpRequest
-): Promise<SuccessResponse | ErrorResponse> =>
-  apiClient
-    .post(ENDPOINT.SIGN_UP, requestBody)
-    .then((_res) => _res)
-    .catch((e) => e);
+): Promise<SuccessResponse> =>
+  apiClient.post(ENDPOINT.SIGN_UP, requestBody).then((_res) => _res.data);
 
 export const signIn = (requestParam: UserSignInRequest) =>
   apiClient

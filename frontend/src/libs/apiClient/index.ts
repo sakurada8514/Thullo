@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "config/api";
-import { logout } from "services";
+import { toSignInPage } from "utils/route";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -15,7 +15,7 @@ apiClient.interceptors.response.use(
       case 401:
         return Promise.reject(error);
       case 403:
-        logout();
+        toSignInPage();
         return false;
       default:
         return false;

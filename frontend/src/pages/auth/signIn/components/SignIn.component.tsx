@@ -7,17 +7,23 @@ import { AuthFormLayout } from "components/layout/AuthFormLayout";
 import { LinkTextButton } from "components/ui/button/LinkTextButton";
 import { ValidationErrorMessage } from "components/ui/form/ValidationErrorMessage";
 import { UserSignInRequest } from "models";
+import { ErrorAlert } from "components/ui/alert/ErrorAlert";
 import { useSignInPresenter } from "./SignIn.presenter";
 
 interface Props {
   doSignIn: (reqest: UserSignInRequest) => Promise<void>;
+  isUnAuthError: boolean;
 }
-export const SignIn: FC<Props> = ({ doSignIn }: Props) => {
+export const SignIn: FC<Props> = ({ doSignIn, isUnAuthError }: Props) => {
   const { formik, isLoading } = useSignInPresenter({ doSignIn });
   return (
     <AuthFormLayout formName="SignIn">
       <div className="">
         <form onSubmit={formik.handleSubmit} autoComplete="off">
+          <ErrorAlert isShow={isUnAuthError}>
+            ログインに失敗しました。メールアドレス、パスワードをご確認の上、再度お試しください。
+          </ErrorAlert>
+
           <div className="mb-6">
             <IconInput
               icon={<MialIcon />}

@@ -1,10 +1,11 @@
 import { UserSignInRequest } from "models";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "services";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
+  const [isUnAuthError, setIsUnAuthError] = useState<boolean>(false);
 
   const doSignIn = useCallback(
     async (reqest: UserSignInRequest) => {
@@ -14,10 +15,11 @@ export const useSignIn = () => {
         })
         .catch((e) => {
           console.log("error", e);
+          setIsUnAuthError(true);
         });
     },
-    [navigate]
+    [navigate, isUnAuthError]
   );
 
-  return { doSignIn };
+  return { doSignIn, isUnAuthError };
 };
