@@ -1,5 +1,8 @@
 package com.example.backend.presentation.controller.user;
 
+import java.util.Objects;
+
+import com.example.backend.common.constant.Error;
 import com.example.backend.domain.model.user.AuthdUser;
 import com.example.backend.presentation.controller.AbstractController;
 import com.example.backend.presentation.view.response.user.UserResponse;
@@ -17,8 +20,13 @@ public class UserController extends AbstractController {
 
     @GetMapping("/authd")
     public ResponseEntity<?> authdUser(@AuthenticationPrincipal AuthdUser authdUser) {
-        if (authdUser.isEnabled())
-            return this.errorResponseEntity("UNAUTHORIZED", "ログインに失敗しました。", HttpStatus.UNAUTHORIZED);
+        if (Objects.isNull(authdUser)) {
+            return this.errorResponseEntity(
+                    Error.UNAUTHORIZED.code(),
+                    Error.UNAUTHORIZED.message(),
+                    HttpStatus.UNAUTHORIZED);
+        }
+
         return this.successResponseEntity(UserResponse.fromUser(authdUser.user()));
     }
 }

@@ -1,36 +1,30 @@
-import { VALIDATE_MESSAGE } from "config/error/validationErrorMessage";
+import { VALIDATE_MESSAGE } from "config/error";
 import { useFormik } from "formik";
 import {
-  toUserSignUpRequest,
-  UserSignFormValues,
-  UserSignUpRequest,
+  toUserSignInRequest,
+  UserSignInFormValues,
+  UserSignInRequest,
 } from "models";
 import { useMemo, useState } from "react";
 import * as Yup from "yup";
 
 interface Args {
-  doSginUp: (reqest: UserSignUpRequest) => Promise<void>;
+  doSignIn: (reqest: UserSignInRequest) => Promise<void>;
 }
-
-export const useSignUpPresenter = ({ doSginUp }: Args) => {
+export const useSignInPresenter = ({ doSignIn }: Args) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const initialValues = useMemo(
     () =>
       ({
-        name: "",
         email: "",
         password: "",
-        passwordConfirm: "",
-      } as UserSignFormValues),
+      } as UserSignInFormValues),
     []
   );
 
   const validationSchema = useMemo(
     () =>
       Yup.object().shape({
-        name: Yup.string()
-          .max(64, VALIDATE_MESSAGE.LENGTH_MAX(64))
-          .required(VALIDATE_MESSAGE.REQUIRED("名前")),
         email: Yup.string()
           .email(VALIDATE_MESSAGE.EMAIL)
           .max(256, VALIDATE_MESSAGE.LENGTH_MAX(256))
@@ -39,19 +33,13 @@ export const useSignUpPresenter = ({ doSginUp }: Args) => {
           .min(8, VALIDATE_MESSAGE.LENGTH_MIN(8))
           .max(256, VALIDATE_MESSAGE.LENGTH_MAX(256))
           .required(VALIDATE_MESSAGE.REQUIRED("パスワード")),
-        passwordConfirm: Yup.string()
-          .required(VALIDATE_MESSAGE.REQUIRED("パスワード確認"))
-          .oneOf(
-            [Yup.ref("password"), null],
-            VALIDATE_MESSAGE.PASSWORD_CONFIRM
-          ),
       }),
     []
   );
 
-  const handleSubmit = async (values: UserSignFormValues) => {
+  const handleSubmit = async (values: UserSignInFormValues) => {
     setIsLoading(true);
-    await doSginUp(toUserSignUpRequest(values));
+    await doSignIn(toUserSignInRequest(values));
     setIsLoading(false);
   };
 

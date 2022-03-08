@@ -1,17 +1,15 @@
-import React, { FC, Suspense } from "react";
-import { BrowserRouter } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { FC, Suspense } from "react";
+import { useAuthdUser } from "utils/hooks/useAuthdUser";
 import { AppRouter } from "./routes/AppRouter";
-// import "./index.css";
 
-export const App: FC = () => (
-  <React.StrictMode>
-    <RecoilRoot>
-      <BrowserRouter>
-        <Suspense fallback={<div>Loading..</div>}>
-          <AppRouter />
-        </Suspense>
-      </BrowserRouter>
-    </RecoilRoot>
-  </React.StrictMode>
-);
+export const App: FC = () => {
+  const { isLoading } = useAuthdUser();
+
+  if (isLoading) return <p>loading</p>;
+
+  return (
+    <Suspense fallback={<div>Loading..</div>}>
+      <AppRouter />
+    </Suspense>
+  );
+};

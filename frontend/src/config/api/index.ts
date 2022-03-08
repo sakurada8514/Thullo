@@ -1,5 +1,3 @@
 export const BASE_URL = process.env.REACT_APP_API_BASEURL;
 
-export const ENDPOINT = {
-  SIGN_UP: "/signup",
-};
+export * from "./endpoint";

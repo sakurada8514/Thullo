@@ -8,7 +8,7 @@ import { GoogleButton } from "components/ui/button/GoogleButton";
 import { LinkTextButton } from "components/ui/button/LinkTextButton";
 import { UserIcon } from "components/ui/icon/UserIcon";
 import { ValidationErrorMessage } from "components/ui/form/ValidationErrorMessage";
-import { useSignUpPresenter } from "pages/auth/signUp/component/SignUp.presenter";
+import { useSignUpPresenter } from "pages/auth/signUp/components/SignUp.presenter";
 import { UserSignUpRequest } from "models";
 
 interface Props {
@@ -74,9 +74,6 @@ export const SignUp: FC<Props> = ({ doSginUp }: Props) => {
               error={formik.errors.passwordConfirm}
             />
           </div>
-          {/* <div className="mb-6 -mt-4 flex items-center">
-            <LinkTextButton to="/">Forgot Your Password?</LinkTextButton>
-          </div> */}
           <div className="flex w-full">
             <BaseSubmitButton isLoading={isLoading} wfull>
               SignUp
@@ -84,10 +81,12 @@ export const SignUp: FC<Props> = ({ doSginUp }: Props) => {
           </div>
         </form>
       </div>
-      <div className="mt-6 border-t-2 border-gray-200 pt-2">
-        <p className="my-3 text-center text-gray-500">OR</p>
+      {/* <div className="relative mt-6 border-t-2 border-gray-200 pt-6">
+        <p className="absolute -top-6 left-1/2 my-3 -translate-x-1/2 transform bg-white px-1 text-center text-gray-500">
+          OR
+        </p>
         <GoogleButton />
-      </div>
+      </div> */}
       <div className="mt-4 flex items-center justify-center">
         <LinkTextButton to="/signin">You have an account ?</LinkTextButton>
       </div>

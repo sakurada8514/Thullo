@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
-import { SignUp } from "pages/auth/signUp/component";
-import { useSignUp } from "./SignUp.hooks";
+import { SignUp } from "pages/auth/signUp/components";
+import { useSignUp } from "./SignUp.hook";
 
 export const SignUpContainer: FC = memo(() => {
   const { doSignUp } = useSignUp();

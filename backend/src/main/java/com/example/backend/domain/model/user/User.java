@@ -1,7 +1,5 @@
 package com.example.backend.domain.model.user;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 public class User {
     Long id;
     String email;
