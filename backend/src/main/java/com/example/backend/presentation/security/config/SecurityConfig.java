@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // AUTHORIZE
                 .authorizeRequests()
-                .mvcMatchers("/signin", "/signup", "/user/authd")
+                .mvcMatchers("/signin", "/user/signup", "/user/authd")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth,
-            @Qualifier("SecurityAuthService") UserDetailsService userDetailsService) throws Exception {
+            @Qualifier("SecurityService") UserDetailsService userDetailsService) throws Exception {
         auth.eraseCredentials(true)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());

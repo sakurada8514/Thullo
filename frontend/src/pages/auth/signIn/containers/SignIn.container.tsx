@@ -3,7 +3,7 @@ import { SignIn } from "../components";
 import { useSignIn } from "./SignIn.hook";
 
 export const SignInContainer: FC = memo(() => {
-  const { doSignIn, isUnAuthError } = useSignIn();
-  return <SignIn doSignIn={doSignIn} isUnAuthError={isUnAuthError} />;
+  const { doSignIn, errorMessage } = useSignIn();
+  return <SignIn doSignIn={doSignIn} errorMessage={errorMessage} />;
 });
 SignInContainer.displayName = "SignInContainer";

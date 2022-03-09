@@ -12,17 +12,15 @@ import { useSignInPresenter } from "./SignIn.presenter";
 
 interface Props {
   doSignIn: (reqest: UserSignInRequest) => Promise<void>;
-  isUnAuthError: boolean;
+  errorMessage: string;
 }
-export const SignIn: FC<Props> = ({ doSignIn, isUnAuthError }: Props) => {
+export const SignIn: FC<Props> = ({ doSignIn, errorMessage }: Props) => {
   const { formik, isLoading } = useSignInPresenter({ doSignIn });
   return (
     <AuthFormLayout formName="SignIn">
       <div className="">
         <form onSubmit={formik.handleSubmit} autoComplete="off">
-          <ErrorAlert isShow={isUnAuthError}>
-            ログインに失敗しました。メールアドレス、パスワードをご確認の上、再度お試しください。
-          </ErrorAlert>
+          {errorMessage && <ErrorAlert>{errorMessage}</ErrorAlert>}
 
           <div className="mb-6">
             <IconInput
@@ -61,9 +59,7 @@ export const SignIn: FC<Props> = ({ doSignIn, isUnAuthError }: Props) => {
           </div>
         </form>
         <div className="mt-4 flex items-center justify-center">
-          <LinkTextButton to="/signup">
-            You do not have an account ?
-          </LinkTextButton>
+          <LinkTextButton to="/signup">Not have an account?</LinkTextButton>
         </div>
       </div>
     </AuthFormLayout>

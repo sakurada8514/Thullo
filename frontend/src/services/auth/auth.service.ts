@@ -1,30 +1,43 @@
 import { AxiosResponse } from "axios";
 import { ENDPOINT } from "config/api";
-// eslint-disable-next-line import/no-cycle
 import { apiClient } from "libs/apiClient";
 import { UserSignInRequest, UserSignUpRequest } from "models";
 import { useNavigate } from "react-router-dom";
-import { ErrorResponse, SuccessResponse } from "types/api/response";
+import { SuccessResponse } from "types/api/response";
 
 export const signUp = (
   requestBody: UserSignUpRequest
 ): Promise<SuccessResponse> =>
-  apiClient.post(ENDPOINT.SIGN_UP, requestBody).then((_res) => _res.data);
+  apiClient.post(ENDPOINT.SIGN_UP, requestBody).then(() =>
+    apiClient
+      .post(
+        ENDPOINT.SIGN_IN,
+        encodeURI(
+          `email=${requestBody.email}&password=${requestBody.password}`
+        ),
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+      .then((_res: AxiosResponse<SuccessResponse>) => _res.data)
+  );
 
-export const signIn = (requestParam: UserSignInRequest) =>
+export const signIn = (
+  requestBody: UserSignInRequest
+): Promise<SuccessResponse> =>
   apiClient
     .post(
       ENDPOINT.SIGN_IN,
-      encodeURI(
-        `email=${requestParam.email}&password=${requestParam.password}`
-      ),
+      encodeURI(`email=${requestBody.email}&password=${requestBody.password}`),
       {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
         },
       }
     )
-    .then((_res: AxiosResponse<SuccessResponse>) => _res);
+    .then((_res: AxiosResponse<SuccessResponse>) => _res.data);
 
 export const logout = () => {
   const navigate = useNavigate();

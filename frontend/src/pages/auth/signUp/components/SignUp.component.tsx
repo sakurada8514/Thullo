@@ -10,16 +10,20 @@ import { UserIcon } from "components/ui/icon/UserIcon";
 import { ValidationErrorMessage } from "components/ui/form/ValidationErrorMessage";
 import { useSignUpPresenter } from "pages/auth/signUp/components/SignUp.presenter";
 import { UserSignUpRequest } from "models";
+import { ErrorAlert } from "components/ui/alert/ErrorAlert";
 
 interface Props {
   doSginUp: (reqest: UserSignUpRequest) => Promise<void>;
+  errorMessage: string;
 }
-export const SignUp: FC<Props> = ({ doSginUp }: Props) => {
+export const SignUp: FC<Props> = ({ doSginUp, errorMessage }: Props) => {
   const { formik, isLoading } = useSignUpPresenter({ doSginUp });
   return (
     <AuthFormLayout formName="SignUp">
       <div className="">
         <form onSubmit={formik.handleSubmit} autoComplete="off">
+          {errorMessage && <ErrorAlert>{errorMessage}</ErrorAlert>}
+
           <div className="mb-6">
             <IconInput
               icon={<UserIcon />}
@@ -88,7 +92,7 @@ export const SignUp: FC<Props> = ({ doSginUp }: Props) => {
         <GoogleButton />
       </div> */}
       <div className="mt-4 flex items-center justify-center">
-        <LinkTextButton to="/signin">You have an account ?</LinkTextButton>
+        <LinkTextButton to="/signin">Have an account?</LinkTextButton>
       </div>
     </AuthFormLayout>
   );

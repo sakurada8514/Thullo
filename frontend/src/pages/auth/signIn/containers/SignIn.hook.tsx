@@ -5,7 +5,7 @@ import { signIn } from "services";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
-  const [isUnAuthError, setIsUnAuthError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const doSignIn = useCallback(
     async (reqest: UserSignInRequest) => {
@@ -13,13 +13,12 @@ export const useSignIn = () => {
         .then(() => {
           navigate("/workspace");
         })
-        .catch((e) => {
-          console.log("error", e);
-          setIsUnAuthError(true);
+        .catch((_e) => {
+          setErrorMessage(_e.message);
         });
     },
-    [navigate, isUnAuthError]
+    [navigate, errorMessage]
   );
 
-  return { doSignIn, isUnAuthError };
+  return { doSignIn, errorMessage };
 };

@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { BASE_URL } from "config/api";
+import { ErrorResponse } from "types/api";
 import { toSignInPage } from "utils/route";
 
 export const apiClient = axios.create({
@@ -8,17 +9,18 @@ export const apiClient = axios.create({
 });
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
+  (error: AxiosError<ErrorResponse>) => {
     console.error("interceptors", error);
 
     switch (error.response?.status) {
       case 401:
-        return Promise.reject(error);
+      case 400:
+        return Promise.reject<ErrorResponse>(error.response?.data);
       case 403:
         toSignInPage();
-        return false;
+        return Promise.reject<ErrorResponse>(error.response?.data);
       default:
-        return false;
+        return Promise.reject<ErrorResponse>(error.response?.data);
     }
   }
 );
