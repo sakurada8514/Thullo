@@ -1,26 +1,34 @@
 import axios, { AxiosError } from "axios";
 import { BASE_URL } from "config/api";
+import { flashActions } from "globalState/flash";
+import { useEffect } from "react";
 import { ErrorResponse } from "types/api";
-import { toSignInPage } from "utils/route";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
 });
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError<ErrorResponse>) => {
-    console.error("interceptors", error);
+export const useErrorHandler = () => {
+  const setFlash = flashActions.setFlash();
+  const errorInterceptor = apiClient.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<ErrorResponse>) => {
+      console.error("interceptors", error);
 
-    switch (error.response?.status) {
-      case 401:
-      case 400:
-        return Promise.reject<ErrorResponse>(error.response?.data);
-      case 403:
-        toSignInPage();
-        return Promise.reject<ErrorResponse>(error.response?.data);
-      default:
-        return Promise.reject<ErrorResponse>(error.response?.data);
+      switch (error.response?.status) {
+        case 401:
+        case 400:
+          setFlash("error", "errro");
+          return Promise.reject<ErrorResponse>(error.response?.data);
+        case 403:
+          window.location.href = "/signin";
+          return false;
+        default:
+          return Promise.reject<ErrorResponse>(error.response?.data);
+      }
     }
-  }
-);
+  );
+  useEffect(() => () => {
+    axios.interceptors.response.eject(errorInterceptor);
+  });
+};
