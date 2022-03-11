@@ -2,7 +2,7 @@ import { SWR_KEYS } from "config/swr";
 import { userActions } from "globalState/user";
 import { User } from "models";
 import { useEffect } from "react";
-import { authdUser } from "services/user/user.service";
+import { authdUser } from "services";
 import useSWR from "swr";
 
 export const useAuthdUser = () => {

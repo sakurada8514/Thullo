@@ -4,9 +4,6 @@ import { memo, ReactNode, useEffect } from "react";
 import { CrossIcon } from "../icon/CrossIcon";
 import { InfoIcon } from "../icon/InfoIcon";
 
-// interface FlashAlertProps {
-
-// }
 const TYPE_CLASSES = {
   success: "border-teal-500 bg-teal-100 text-teal-900",
   error: "border-red-500 bg-red-100 text-red-900",
@@ -27,8 +24,6 @@ export const FlashAlert = memo(() => {
     resetFlash();
   };
   useEffect(() => {
-    console.log(flashInfo);
-
     if (flashInfo) {
       setTimeout(() => {
         resetFlash();

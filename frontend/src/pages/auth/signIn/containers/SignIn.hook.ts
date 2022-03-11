@@ -13,8 +13,7 @@ export const useSignIn = () => {
     async (reqest: UserSignInRequest) => {
       await signIn(reqest)
         .then(() => {
-          setFlash("success", "テスト");
-          navigate("/workspace");
+          navigate("/board/list");
         })
         .catch((_e) => {
           setErrorMessage(_e.message);

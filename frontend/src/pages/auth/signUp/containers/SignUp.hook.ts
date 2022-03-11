@@ -11,7 +11,7 @@ export const useSignUp = () => {
     async (reqest: UserSignUpRequest) => {
       await signUp(reqest)
         .then(() => {
-          navigate("/workspase");
+          navigate("/board/list");
         })
         .catch((_e) => {
           setErrorMessage(_e.message);

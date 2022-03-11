@@ -1,3 +1,4 @@
+import { FlashAlert } from "components/ui/alert/FlashAlert";
 import { useErrorHandler } from "libs/apiClient";
 import { FC, Suspense } from "react";
 import { useAuthdUser } from "utils/hooks/useAuthdUser";
@@ -11,8 +12,11 @@ export const App: FC = () => {
   if (isLoading) return <p>loading</p>;
 
   return (
-    <Suspense fallback={<div>Loading..</div>}>
-      <AppRouter />
-    </Suspense>
+    <>
+      <Suspense fallback={<div>Loading..</div>}>
+        <AppRouter />
+      </Suspense>
+      <FlashAlert />
+    </>
   );
 };

@@ -1,6 +1,3 @@
-import { FlashAlert } from "components/ui/alert/FlashAlert";
-import { CrossIcon } from "components/ui/icon/CrossIcon";
-import { InfoIcon } from "components/ui/icon/InfoIcon";
 import { LogoIcon } from "components/ui/icon/LogoIcon";
 import { FC, memo, ReactNode } from "react";
 
@@ -22,7 +19,6 @@ export const AuthFormLayout: FC<Props> = memo(
           {children}
         </div>
       </div>
-      <FlashAlert />
     </>
   )
 );

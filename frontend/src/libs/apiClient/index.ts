@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { BASE_URL } from "config/api";
+import { MESSAGE } from "config/error/message";
 import { flashActions } from "globalState/flash";
 import { useEffect } from "react";
 import { ErrorResponse } from "types/api";
@@ -16,12 +17,14 @@ export const useErrorHandler = () => {
       console.error("interceptors", error);
 
       switch (error.response?.status) {
-        case 401:
         case 400:
-          setFlash("error", "errro");
+        case 401:
           return Promise.reject<ErrorResponse>(error.response?.data);
         case 403:
           window.location.href = "/signin";
+          return false;
+        case 500:
+          setFlash("error", MESSAGE.serverError);
           return false;
         default:
           return Promise.reject<ErrorResponse>(error.response?.data);
