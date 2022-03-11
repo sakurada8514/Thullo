@@ -33,49 +33,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thullo`.`workspaces`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thullo`.`workspaces` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `workspace_name` VARCHAR(64) NOT NULL,
-  `workspaces_description` TEXT NOT NULL,
-  `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `thullo`.`users_workspaces`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `thullo`.`users_workspaces` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT NOT NULL,
-  `workspace_id` BIGINT NOT NULL,
-  `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  INDEX `fk_users_workspaces_01_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_users_workspaces_02_idx` (`workspace_id` ASC) VISIBLE,
-  CONSTRAINT `fk_users_workspaces_01`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `thullo`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_workspaces_02`
-    FOREIGN KEY (`workspace_id`)
-    REFERENCES `thullo`.`workspaces` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `thullo`.`boards`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `thullo`.`boards` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `workspace_id` BIGINT NOT NULL,
   `admin_user_id` BIGINT NOT NULL COMMENT '作成者',
   `board_name` VARCHAR(64) NOT NULL,
   `board_description` TEXT NOT NULL,
@@ -84,15 +45,9 @@ CREATE TABLE IF NOT EXISTS `thullo`.`boards` (
   `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_boards_01_idx` (`admin_user_id` ASC) VISIBLE,
-  INDEX `fk_boards_02_idx` (`workspace_id` ASC) VISIBLE,
   CONSTRAINT `fk_boards_01`
     FOREIGN KEY (`admin_user_id`)
     REFERENCES `thullo`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_boards_02`
-    FOREIGN KEY (`workspace_id`)
-    REFERENCES `thullo`.`workspaces` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

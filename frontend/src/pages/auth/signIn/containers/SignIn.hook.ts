@@ -1,3 +1,4 @@
+import { flashActions } from "globalState/flash";
 import { UserSignInRequest } from "models";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,21 +6,21 @@ import { signIn } from "services";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
-  const [isUnAuthError, setIsUnAuthError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const setFlash = flashActions.setFlash();
 
   const doSignIn = useCallback(
     async (reqest: UserSignInRequest) => {
       await signIn(reqest)
         .then(() => {
-          navigate("/workspace");
+          navigate("/board/list");
         })
-        .catch((e) => {
-          console.log("error", e);
-          setIsUnAuthError(true);
+        .catch((_e) => {
+          setErrorMessage(_e.message);
         });
     },
-    [navigate, isUnAuthError]
+    [navigate, errorMessage]
   );
 
-  return { doSignIn, isUnAuthError };
+  return { doSignIn, errorMessage };
 };

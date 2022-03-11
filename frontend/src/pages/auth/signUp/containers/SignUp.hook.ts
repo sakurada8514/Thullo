@@ -1,18 +1,24 @@
 import { UserSignUpRequest } from "models";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "services";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const doSignUp = useCallback(
     async (reqest: UserSignUpRequest) => {
-      await signUp(reqest);
-      navigate("/board");
+      await signUp(reqest)
+        .then(() => {
+          navigate("/board/list");
+        })
+        .catch((_e) => {
+          setErrorMessage(_e.message);
+        });
     },
-    [navigate]
+    [navigate, errorMessage]
   );
 
-  return { doSignUp };
+  return { doSignUp, errorMessage };
 };
