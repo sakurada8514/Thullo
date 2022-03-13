@@ -10,7 +10,6 @@ export const useSignUp = () => {
   const setUser = userActions.setUser();
 
   const doSignUp = useCallback(
-    // トライキャッチにする？
     async (reqest: UserSignUpRequest) => {
       signUp(reqest)
         .then(async () => {
