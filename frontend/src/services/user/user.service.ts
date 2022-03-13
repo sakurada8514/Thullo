@@ -8,6 +8,5 @@ export const authdUser = (): Promise<User> =>
     .get(ENDPOINT.AUTHD_USER)
     .then((_res: AxiosResponse<User>) => _res.data)
     .catch(() => {
-      console.log("serviceerror");
       throw new Error();
     });
