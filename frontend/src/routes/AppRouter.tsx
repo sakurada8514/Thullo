@@ -1,12 +1,46 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { SignUpPage } from "pages/auth/signUp";
-import { SignInPage } from "pages/auth/signIn/SignIn.page";
+import { SignInPage } from "pages/auth/signIn";
+import { BoardListPage } from "pages/board/list";
+import { BoardCreatePage } from "pages/board/create";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 
-export const AppRouter = () => (
-  <Routes>
-    <Route path="/signup" element={<PublicRoute element={<SignUpPage />} />} />
-    <Route path="/signin" element={<PublicRoute element={<SignInPage />} />} />
-  </Routes>
-);
+export const AppRouter = () => {
+  const location = useLocation();
+  const state = location.state as { backgroundLocation?: Location };
+
+  return (
+    <>
+      <Routes location={state?.backgroundLocation || location}>
+        {/* auth */}
+        <Route
+          path="/signup"
+          element={<PublicRoute element={<SignUpPage />} />}
+        />
+        <Route
+          path="/signin"
+          element={<PublicRoute element={<SignInPage />} />}
+        />
+
+        {/* board */}
+        <Route
+          path="/board/list"
+          element={<PrivateRoute element={<BoardListPage />} />}
+        />
+        <Route
+          path="/board/create"
+          element={<PrivateRoute element={<BoardCreatePage />} />}
+        />
+      </Routes>
+      {state?.backgroundLocation && (
+        <Routes>
+          <Route
+            path="/board/create"
+            element={<PrivateRoute element={<BoardCreatePage />} />}
+          />
+        </Routes>
+      )}
+    </>
+  );
+};

@@ -1,5 +1,8 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  options: {
+    whitelist: ['max-w-lg', 'max-w-xl']
+  },
   theme: {
     extend: {
       colors: {

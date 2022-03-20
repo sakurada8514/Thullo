@@ -8,7 +8,7 @@ interface PublicRouteProps {
 export const PublicRoute: FC<PublicRouteProps> = ({ element }) => {
   const isAuthd: boolean = userSelectors.isAuthd();
 
-  return isAuthd ? <Navigate to="/mypage" /> : element;
+  return isAuthd ? <Navigate to="/board/list" /> : element;
 };
 
 PublicRoute.displayName = "PublicRoute";

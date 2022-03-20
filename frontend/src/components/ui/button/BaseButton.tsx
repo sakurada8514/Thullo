@@ -5,32 +5,34 @@ import { LoadingIcon } from "../icon/LoadingIcon";
 
 interface Props {
   children: ReactNode;
-  isLoading?: boolean;
+  //   isLoading?: boolean;
   wfull?: boolean;
   classes?: string;
+  handleClick?: () => void;
 }
 
-export const BaseSubmitButton: FC<Props> = memo(
-  ({ children, isLoading = false, wfull = false, classes = "" }: Props) => (
+export const BaseButton: FC<Props> = memo(
+  ({ children, wfull = false, classes = "", handleClick }: Props) => (
     <button
-      type="submit"
+      onClick={handleClick}
+      type="button"
       className={clsx(
         wfull && "w-full",
-        isLoading && "cursor-not-allowed",
+        // isLoading && "cursor-not-allowed",
         "rounded-lg bg-primary text-center font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-primary-dark focus:outline-none",
-        twcx("py-2 px-4 text-base", classes)
+        twcx("px-4 py-2 text-base", classes)
       )}
-      disabled={isLoading}
+      //   disabled={isLoading}
     >
-      {isLoading ? (
+      {/* {isLoading ? (
         <div className="flex justify-center">
           <LoadingIcon color="white" />
         </div>
-      ) : (
-        children
-      )}
+      ) : ( */}
+      {children}
+      {/* )} */}
     </button>
   )
 );
 
-BaseSubmitButton.displayName = "BaseSubmitButton";
+BaseButton.displayName = "BaseButton";
