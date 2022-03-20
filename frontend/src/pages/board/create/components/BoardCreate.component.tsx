@@ -7,13 +7,14 @@ import { LookCloseIcon } from "components/ui/icon/LookCloseIcon";
 import { LookOpenIcon } from "components/ui/icon/LookOpenIcon";
 import { PlusIcon } from "components/ui/icon/PlusIcon";
 import { BaseModal } from "components/ui/modal/BaseModal";
-import { PUBLIC_SCOPE_TYPE } from "models/board";
+import { BoardCreateRequest, PUBLIC_SCOPE_TYPE } from "models/board";
 import { FC, memo, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useBoardCreatePresenter } from "./BoardCreate.presenter";
 
 interface BoardCreateProps {
   initImage: string | undefined;
+  doCreateBoard: (reqest: BoardCreateRequest) => Promise<void>;
 }
 
 const PUBLIC_SCOPE_TYPE_ICON = {
@@ -22,9 +23,10 @@ const PUBLIC_SCOPE_TYPE_ICON = {
 } as { [key: string]: ReactNode };
 
 export const BoardCreate: FC<BoardCreateProps> = memo(
-  ({ initImage }: BoardCreateProps) => {
+  ({ initImage, doCreateBoard }: BoardCreateProps) => {
     const { handleCloseNavigate, formik, isLoading } = useBoardCreatePresenter({
       initImage,
+      doCreateBoard,
     });
 
     return (

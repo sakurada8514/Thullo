@@ -1,16 +1,21 @@
 import { VALIDATE_MESSAGE } from "config/error";
 import { useFormik } from "formik";
-import { UserSignInFormValues, toUserSignInRequest } from "models";
-import { BoardCreateFormValue } from "models/board";
+import { userSelectors } from "globalState/user";
+import {
+  BoardCreateFormValue,
+  BoardCreateRequest,
+  toBoardCreateRequest,
+} from "models/board";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 interface Args {
   initImage: string | undefined;
+  doCreateBoard: (reqest: BoardCreateRequest) => Promise<void>;
 }
 
-export const useBoardCreatePresenter = ({ initImage }: Args) => {
+export const useBoardCreatePresenter = ({ initImage, doCreateBoard }: Args) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const initialValues = useMemo(
     () =>
@@ -42,9 +47,7 @@ export const useBoardCreatePresenter = ({ initImage }: Args) => {
 
   const handleSubmit = async (values: BoardCreateFormValue) => {
     setIsLoading(true);
-    // await doSignIn(toUserSignInRequest(values));
-    console.log(values);
-
+    doCreateBoard(toBoardCreateRequest(values));
     setIsLoading(false);
   };
 

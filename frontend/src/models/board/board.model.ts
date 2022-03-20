@@ -19,3 +19,16 @@ export interface BoardCreateFormValue {
   image: string;
   publicScopeType: PublicScopeType;
 }
+export interface BoardCreateRequest {
+  boardName: string;
+  boardDiscription: string;
+  image: string;
+  publicScopeType: PublicScopeType;
+}
+
+export const toBoardCreateRequest = (values: BoardCreateFormValue) => ({
+  boardName: values.boardName,
+  boardDiscription: values.boardDiscription,
+  image: values.image,
+  publicScopeType: values.publicScopeType,
+});

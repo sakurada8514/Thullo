@@ -4,13 +4,13 @@ import { useCallback } from "react";
 import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface UserState {
-  id: number | null;
+  id: number;
   name: string;
   icon?: string;
   isAuthd: boolean;
 }
 const initUserState: UserState = {
-  id: null,
+  id: 0,
   name: "",
   isAuthd: false,
 };
