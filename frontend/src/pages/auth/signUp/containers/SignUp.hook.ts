@@ -2,7 +2,7 @@ import { userActions } from "globalState/user";
 import { UserSignUpRequest } from "models";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authdUser, signUp } from "services";
+import { fetchPrincipalUser, signUp } from "services";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const useSignUp = () => {
     async (reqest: UserSignUpRequest) => {
       signUp(reqest)
         .then(async () => {
-          const user = await authdUser();
+          const user = await fetchPrincipalUser();
           setUser(user);
           navigate("/board/list");
         })

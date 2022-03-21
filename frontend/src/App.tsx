@@ -1,11 +1,11 @@
 import { FlashAlert } from "components/ui/alert/FlashAlert";
 import { WithAxiosErrorHandler } from "libs/apiClient/WithAxiosErrorHandler";
 import { FC, Suspense } from "react";
-import { useAuthdUser } from "utils/hooks/useAuthdUser";
+import { usePrincipalUser } from "utils/hooks/usePrincipalUser";
 import { AppRouter } from "./routes/AppRouter";
 
 export const App: FC = () => {
-  const { isLoading } = useAuthdUser();
+  const { isLoading } = usePrincipalUser();
 
   if (isLoading) return <p>loading</p>;
 

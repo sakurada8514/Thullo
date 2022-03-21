@@ -2,14 +2,14 @@ import { SWR_KEYS } from "config/swr";
 import { userActions } from "globalState/user";
 import { User } from "models";
 import { useEffect } from "react";
-import { authdUser } from "services";
+import { fetchPrincipalUser } from "services";
 import useSWR from "swr";
 
-export const useAuthdUser = () => {
+export const usePrincipalUser = () => {
   const setUser = userActions.setUser();
   const { data: user, error } = useSWR<User>(
-    SWR_KEYS.FATCH_AUTHD_USER,
-    authdUser,
+    SWR_KEYS.FATCH_PRINCIPAL_USER,
+    fetchPrincipalUser,
     {
       shouldRetryOnError: false,
     }

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.example.backend.application.service.user.UserService;
 import com.example.backend.common.constant.Error;
-import com.example.backend.domain.model.user.AuthdUser;
+import com.example.backend.domain.model.user.PrincipalUser;
 import com.example.backend.presentation.controller.AbstractController;
 import com.example.backend.presentation.view.request.auth.SignUpRequest;
 import com.example.backend.presentation.view.response.SuccessResponse;
@@ -28,16 +28,16 @@ public class UserController extends AbstractController {
         this.userService = userService;
     }
 
-    @GetMapping("/authd")
-    public ResponseEntity<?> authdUser(@AuthenticationPrincipal AuthdUser authdUser) {
-        if (Objects.isNull(authdUser)) {
+    @GetMapping("/principal")
+    public ResponseEntity<?> principalUser(@AuthenticationPrincipal PrincipalUser principalUser) {
+        if (Objects.isNull(principalUser)) {
             return this.errorResponseEntity(
                     Error.UNAUTHORIZED.code(),
                     Error.UNAUTHORIZED.message(),
                     HttpStatus.UNAUTHORIZED);
         }
 
-        return this.successResponseEntity(UserResponse.fromUser(authdUser.user()));
+        return this.successResponseEntity(UserResponse.fromUser(principalUser.user()));
     }
 
     @PostMapping("/signup")
