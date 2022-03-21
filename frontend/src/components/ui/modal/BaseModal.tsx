@@ -14,11 +14,11 @@ export const BaseModal: FC<BaseModalProps> = ({
   children,
   maxWidth = "md",
 }: BaseModalProps) => (
-  <div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-10 pt-32">
+  <div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-10 pt-28">
     <div
       className={clsx(
         `max-w-${maxWidth}`,
-        "absolute top-32 left-1/2 inline-block w-11/12 -translate-x-1/2 transform rounded-lg bg-white"
+        "absolute top-28 left-1/2 inline-block max-h-full w-11/12 -translate-x-1/2 transform rounded-lg bg-white"
       )}
     >
       <div className="relative p-6">

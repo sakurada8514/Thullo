@@ -1,8 +1,9 @@
-package com.example.backend.domain.model.user;
+package com.example.backend.domain.service.user;
 
 import java.util.Objects;
 
 import com.example.backend.application.repository.user.UserRepository;
+import com.example.backend.domain.model.user.User;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.backend.common.constant;
+package com.example.backend.support.constant;
 
 public enum Error {
     FORBIDDEN("FORBIDDEN", "認証エラーまたはアクセス権限がありません。"),

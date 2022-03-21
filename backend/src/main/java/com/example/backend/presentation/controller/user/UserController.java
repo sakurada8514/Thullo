@@ -3,12 +3,12 @@ package com.example.backend.presentation.controller.user;
 import java.util.Objects;
 
 import com.example.backend.application.service.user.UserService;
-import com.example.backend.common.constant.Error;
 import com.example.backend.domain.model.user.PrincipalUser;
 import com.example.backend.presentation.controller.AbstractController;
 import com.example.backend.presentation.view.request.auth.SignUpRequest;
 import com.example.backend.presentation.view.response.SuccessResponse;
 import com.example.backend.presentation.view.response.user.UserResponse;
+import com.example.backend.support.constant.Error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
