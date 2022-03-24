@@ -1,6 +1,6 @@
-package com.example.backend.common.exception;
+package com.example.backend.support.exception;
 
-import com.example.backend.common.constant.Error;
+import com.example.backend.support.constant.Error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

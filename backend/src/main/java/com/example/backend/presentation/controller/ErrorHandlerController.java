@@ -1,8 +1,8 @@
 package com.example.backend.presentation.controller;
 
-import com.example.backend.common.constant.Error;
-import com.example.backend.common.exception.RegisteredException;
 import com.example.backend.presentation.view.response.ErrorResponse;
+import com.example.backend.support.constant.Error;
+import com.example.backend.support.exception.RegisteredException;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

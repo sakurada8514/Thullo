@@ -1,8 +1,8 @@
 package com.example.backend.infrastructure.datasource.user;
 
 import com.example.backend.application.repository.user.UserRepository;
-import com.example.backend.common.exception.RegisteredException;
 import com.example.backend.domain.model.user.User;
+import com.example.backend.support.exception.RegisteredException;
 
 import org.springframework.stereotype.Repository;
 

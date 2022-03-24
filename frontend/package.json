@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/react": "^11.8.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -22,6 +24,7 @@
     "recoil": "^0.6.1",
     "swr": "^1.2.2",
     "typescript": "^4.5.5",
+    "unsplash-js": "^7.0.15",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

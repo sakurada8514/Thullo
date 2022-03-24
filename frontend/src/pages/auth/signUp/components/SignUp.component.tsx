@@ -20,7 +20,7 @@ export const SignUp: FC<Props> = ({ doSginUp, errorMessage }: Props) => {
   const { formik, isLoading } = useSignUpPresenter({ doSginUp });
   return (
     <AuthFormLayout formName="SignUp">
-      <div className="">
+      <div>
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           {errorMessage && <ErrorAlert>{errorMessage}</ErrorAlert>}
 

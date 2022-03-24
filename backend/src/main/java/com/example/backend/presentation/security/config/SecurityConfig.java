@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // AUTHORIZE
                 .authorizeRequests()
-                .mvcMatchers("/signin", "/user/signup", "/user/authd")
+                .mvcMatchers("/signin", "/user/signup", "/user/principal")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // CSRF
                 .csrf()
                 .disable();
-        // .ignoringAntMatchers("/user/authd")
+        // .ignoringAntMatchers("/user/principal")
         // .csrfTokenRepository(new CookieCsrfTokenRepository());
     }
 

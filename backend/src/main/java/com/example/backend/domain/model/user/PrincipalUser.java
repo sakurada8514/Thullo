@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-public class AuthdUser extends org.springframework.security.core.userdetails.User {
+public class PrincipalUser extends org.springframework.security.core.userdetails.User {
     private User user;
 
     public User user() {
         return this.user;
     }
 
-    public AuthdUser(User user) {
+    public PrincipalUser(User user) {
         super(user.name(), user.password(), USER_ROLES);
         this.user = user;
     }

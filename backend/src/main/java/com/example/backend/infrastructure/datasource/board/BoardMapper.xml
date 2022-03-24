@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.infrastructure.datasource.board.BoardMapper">
+    <insert id="insertBoard" parameterType="com.example.backend.domain.model.board.Board" useGeneratedKeys="true" keyProperty="id">
+        INSERT IGNORE INTO boards
+        (
+            board_name
+            ,board_description
+            ,public_scope_type
+            ,image
+            ,admin_user_id
+        )
+        VALUES 
+        (
+            #{boardName}
+            ,#{boardDiscription}
+            ,#{publicScopeType}
+            ,#{image}
+            ,#{adminUserId}
+        ) 
+    </insert>
+
+</mapper>

@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `thullo`.`boards` (
   `admin_user_id` BIGINT NOT NULL COMMENT '作成者',
   `board_name` VARCHAR(64) NOT NULL,
   `board_description` TEXT NOT NULL,
-  `public_scope_type` TINYINT NOT NULL COMMENT '公開範囲 0:非公開招待されたメンバーのみ、1:ワークスペースのメンバー全員、2:全公開',
+  `image` VARCHAR(256) NOT NULL,
+  `public_scope_type` TINYINT NOT NULL COMMENT '公開範囲 0:非公開招待されたメンバーのみprivate、1:全公開public',
   `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -84,7 +85,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `thullo`.`user_icons` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
-  `icon_s3_path` VARCHAR(128) NOT NULL,
+  `icon` VARCHAR(256) NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

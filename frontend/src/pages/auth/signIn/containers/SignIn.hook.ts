@@ -1,18 +1,20 @@
-import { flashActions } from "globalState/flash";
+import { userActions } from "globalState/user";
 import { UserSignInRequest } from "models";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "services";
+import { fetchPrincipalUser, signIn } from "services";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const setFlash = flashActions.setFlash();
+  const setUser = userActions.setUser();
 
   const doSignIn = useCallback(
     async (reqest: UserSignInRequest) => {
-      await signIn(reqest)
-        .then(() => {
+      signIn(reqest)
+        .then(async () => {
+          const user = await fetchPrincipalUser();
+          setUser(user);
           navigate("/board/list");
         })
         .catch((_e) => {
