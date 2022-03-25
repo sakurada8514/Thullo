@@ -3,6 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backend.infrastructure.datasource.board.BoardMapper">
+    <resultMap id="board" type="com.example.backend.domain.model.board.Board">
+        <id property="id" column="id" />
+        <result property="boardName" column="board_name"/>
+        <result property="boardDiscription" column="board_description"/>
+        <result property="publicScopeType" column="public_scope_type"/>
+        <result property="image" column="image"/>
+        <result property="adminUserId" column="admin_user_id"/>
+    </resultMap>
+
+    <select id="selectBoardListByUserId" resultMap="board">
+        SELECT
+            b.id
+            ,b.board_name
+            ,b.board_description
+            ,b.public_scope_type
+            ,b.image
+            ,b.admin_user_id
+            ,b.image
+        FROM
+            boards AS b
+        JOIN
+            users_boards AS ub
+            ON b.id = ub.board_id
+            AND ub.user_id = #{userId}
+    </select>
     <insert id="insertBoard" parameterType="com.example.backend.domain.model.board.Board" useGeneratedKeys="true" keyProperty="id">
         INSERT IGNORE INTO boards
         (
@@ -19,6 +44,18 @@
             ,#{publicScopeType}
             ,#{image}
             ,#{adminUserId}
+        ) 
+    </insert>
+    <insert id="insertBoardMember" parameterType="Long">
+        INSERT IGNORE INTO users_boards
+        (
+            user_id
+            ,board_id
+        )
+        VALUES 
+        (
+            #{userId}
+            ,#{boardId}
         ) 
     </insert>
 

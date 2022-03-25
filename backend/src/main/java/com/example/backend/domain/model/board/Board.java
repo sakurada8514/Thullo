@@ -19,4 +19,8 @@ public class Board {
     public Long id() {
         return this.id;
     }
+
+    public Long adminUserId() {
+        return this.adminUserId;
+    }
 }
