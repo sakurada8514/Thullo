@@ -13,7 +13,7 @@ public class PrincipalUser extends org.springframework.security.core.userdetails
     }
 
     public PrincipalUser(User user) {
-        super(user.name(), user.password(), USER_ROLES);
+        super(user.getEmail(), user.getPassword(), USER_ROLES);
         this.user = user;
     }
 

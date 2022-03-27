@@ -28,11 +28,11 @@ public class BoardController extends AbstractController {
     public ResponseEntity<BoardCreateSuccessResponse> create(
             @AuthenticationPrincipal PrincipalUser principalUser,
             @RequestBody BoardRequest request) {
-        return successResponseEntity(boardService.create(request.toBoard(principalUser.user().id())));
+        return successResponseEntity(boardService.create(request.toBoard(principalUser.user().getId())));
     }
 
     @GetMapping("/list/my")
     public ResponseEntity<BoardListResponse> list(@AuthenticationPrincipal PrincipalUser principalUser) {
-        return successResponseEntity(boardService.list(principalUser.user().id()));
+        return successResponseEntity(boardService.list(principalUser.user().getId()));
     }
 }

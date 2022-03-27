@@ -20,8 +20,8 @@ public class BoardDatasource implements BoardRepository {
     @Transactional
     public Long creartBoard(Board board) {
         boardMapper.insertBoard(board);
-        boardMapper.insertBoardMember(board.id(), board.adminUserId());
-        return board.id();
+        boardMapper.insertBoardMember(board.getId(), board.getAdminUserId());
+        return board.getId();
     }
 
     @Override

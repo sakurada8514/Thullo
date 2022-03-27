@@ -10,8 +10,8 @@ public class UserResponse {
     private String name;
 
     public UserResponse(User user) {
-        this.id = user.id();
-        this.name = user.name();
+        this.id = user.getId();
+        this.name = user.getName();
     }
 
     public static UserResponse fromUser(User user) {

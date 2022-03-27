@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public SuccessResponse signUp(User user) throws RegisteredException {
-        if (userDomainService.exists(user.email()))
+        if (userDomainService.exists(user.getEmail()))
             throw new RegisteredException();
 
         this.userRepository.creartUser(user);
