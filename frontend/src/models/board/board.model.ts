@@ -1,3 +1,5 @@
+import { User } from "models/user";
+
 export const PUBLIC_SCOPE_TYPE = {
   0: "Private",
   1: "Public",
@@ -11,6 +13,13 @@ export interface Board {
   image: string;
   adminUserId: number;
   publicScopeType: PublicScopeType;
+  members: BoardMember[];
+}
+
+export interface BoardMember {
+  id: number;
+  name: string;
+  icon?: string;
 }
 
 export interface BoardCreateFormValue {

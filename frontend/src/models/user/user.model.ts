@@ -3,7 +3,7 @@ import { sha256 } from "utils/hash";
 export interface User {
   id: number;
   name: string;
-  iconPath?: string;
+  icon?: string;
 }
 
 export interface UserSignUpRequest {

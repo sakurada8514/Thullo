@@ -1,5 +1,9 @@
 package com.example.backend.domain.model.board;
 
+import java.util.List;
+
+import com.example.backend.domain.model.user.Member;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +14,7 @@ public class Board {
     private Integer publicScopeType;
     private String image;
     private Long adminUserId;
+    private List<Member> members;
 
     public Board() {
     }
