@@ -1,8 +1,9 @@
-import { AxiosResponse } from "axios";
 import { ENDPOINT } from "config/api";
 import { apiClient } from "libs/apiClient";
-import { BoardCreateRequest } from "models/board";
-import { SuccessResponse } from "types/api";
+import { Board, BoardCreateRequest } from "models/board";
 
-export const createBoard = (requestBody: BoardCreateRequest) =>
+type CreateBoardResponse = Pick<Board, "id">;
+export const createBoard = (
+  requestBody: BoardCreateRequest
+): Promise<CreateBoardResponse> =>
   apiClient.post(ENDPOINT.BOARD_CREATE, requestBody).then((_res) => _res.data);

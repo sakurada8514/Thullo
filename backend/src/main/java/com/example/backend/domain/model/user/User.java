@@ -1,5 +1,8 @@
 package com.example.backend.domain.model.user;
 
+import lombok.Data;
+
+@Data
 public class User {
     Long id;
     String email;
@@ -14,21 +17,4 @@ public class User {
         this.name = name;
         this.password = (new Password(password)).encode();
     }
-
-    public String name() {
-        return this.name;
-    }
-
-    public String password() {
-        return this.password;
-    }
-
-    public Long id() {
-        return this.id;
-    }
-
-    public String email() {
-        return this.email;
-    }
-
 }

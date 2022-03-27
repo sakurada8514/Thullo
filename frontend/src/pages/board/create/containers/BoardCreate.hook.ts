@@ -19,9 +19,9 @@ export const useBoardCreate = () => {
   );
 
   const doCreateBoard = useCallback(async (reqest: BoardCreateRequest) => {
-    createBoard(reqest).then(() => {
+    createBoard(reqest).then((_res) => {
       mutate();
-      navigate("/board/1");
+      navigate(`/board/${_res.id}`);
     });
   }, []);
 
