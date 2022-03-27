@@ -6,6 +6,7 @@ import { ValidationErrorMessage } from "components/ui/form/ValidationErrorMessag
 import { LookCloseIcon } from "components/ui/icon/LookCloseIcon";
 import { LookOpenIcon } from "components/ui/icon/LookOpenIcon";
 import { PlusIcon } from "components/ui/icon/PlusIcon";
+import { Skeleton } from "components/ui/loading/Skeleton";
 import { BaseModal } from "components/ui/modal/BaseModal";
 import { BoardCreateRequest, PUBLIC_SCOPE_TYPE } from "models/board";
 import { FC, memo, ReactNode } from "react";
@@ -31,13 +32,17 @@ export const BoardCreate: FC<BoardCreateProps> = memo(
 
     return (
       <BaseModal handleClose={handleCloseNavigate} maxWidth="lg">
-        <img
-          src={initImage}
-          alt=""
-          width="800"
-          height="200"
-          className="mb-8 h-32 w-full rounded-lg object-cover"
-        />
+        {initImage ? (
+          <img
+            src={initImage}
+            alt=""
+            width="800"
+            height="200"
+            className="mb-8 h-32 w-full rounded-lg object-cover"
+          />
+        ) : (
+          <Skeleton w="w-full" h="h-32" classes="mb-8" />
+        )}
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <div className="mb-4">
             <Input
@@ -64,7 +69,7 @@ export const BoardCreate: FC<BoardCreateProps> = memo(
               error={formik.errors.boardDiscription}
             />
           </div>
-          <div className="mb-6 w-1/2">
+          <div className="mb-6 w-3/5 md:w-1/2">
             <SelectWithIcon
               name="publicScopeType"
               id="publicScopeType"

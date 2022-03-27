@@ -10,6 +10,11 @@
         <result property="publicScopeType" column="public_scope_type"/>
         <result property="image" column="image"/>
         <result property="adminUserId" column="admin_user_id"/>
+        <collection property="members" ofType="com.example.backend.domain.model.user.Member">
+            <id property="id" column="user_id" />
+            <result property="name" column="name"/>
+            <result property="icon" column="icon"/>
+        </collection>
     </resultMap>
 
     <select id="selectBoardListByUserId" resultMap="board">
@@ -21,12 +26,24 @@
             ,b.image
             ,b.admin_user_id
             ,b.image
+            ,u.id AS user_id
+            ,u.name
+            ,ui.icon
         FROM
             boards AS b
         JOIN
             users_boards AS ub
             ON b.id = ub.board_id
             AND ub.user_id = #{userId}
+        JOIN
+            users_boards AS ub_member
+            ON b.id = ub_member.board_id
+        JOIN
+            users AS u
+            ON ub_member.user_id = u.id
+        LEFT JOIN
+            user_icons AS ui
+            ON u.id = ui.user_id
     </select>
     <insert id="insertBoard" parameterType="com.example.backend.domain.model.board.Board" useGeneratedKeys="true" keyProperty="id">
         INSERT IGNORE INTO boards
@@ -58,5 +75,4 @@
             ,#{boardId}
         ) 
     </insert>
-
 </mapper>
