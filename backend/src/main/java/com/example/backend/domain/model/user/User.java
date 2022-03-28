@@ -1,8 +1,8 @@
 package com.example.backend.domain.model.user;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class User {
     Long id;
     String email;

@@ -1,5 +1,1 @@
-import { lazy } from "react";
-
-export const SignInPage = lazy(() =>
-  import("./SignIn.page").then((m) => ({ default: m.SignInPage }))
-);
+export * from "./SignIn.page";

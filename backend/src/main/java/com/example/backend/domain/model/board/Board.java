@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.example.backend.domain.model.user.Member;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Board {
     private Long id;
     private String boardName;

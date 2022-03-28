@@ -38,8 +38,3 @@ export const signIn = (
       }
     )
     .then((_res: AxiosResponse<SuccessResponse>) => _res.data);
-
-export const logout = () => {
-  const navigate = useNavigate();
-  navigate("/signin");
-};

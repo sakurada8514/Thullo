@@ -1,7 +1,8 @@
-import { FlashAlert } from "components/ui/alert/FlashAlert";
-import { WithAxiosErrorHandler } from "libs/apiClient/WithAxiosErrorHandler";
+import { AxiosErrorHandleProvider } from "components/provider/AxiosErrorHandleProvider";
 import { FC, Suspense } from "react";
 import { usePrincipalUser } from "utils/hooks/usePrincipalUser";
+import { FlashAlertProvider } from "components/provider/FlashAlertProvider";
+import { SWRConfig } from "swr";
 import { AppRouter } from "./routes/AppRouter";
 
 export const App: FC = () => {
@@ -11,12 +12,11 @@ export const App: FC = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading..</div>}>
-        <WithAxiosErrorHandler>
+      <FlashAlertProvider>
+        <AxiosErrorHandleProvider>
           <AppRouter />
-        </WithAxiosErrorHandler>
-      </Suspense>
-      <FlashAlert />
+        </AxiosErrorHandleProvider>
+      </FlashAlertProvider>
     </>
   );
 };

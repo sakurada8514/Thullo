@@ -2,13 +2,13 @@ import { MESSAGE } from "config/error/message";
 import { flashActions } from "globalState/flash";
 import { FC, memo, ReactNode, useEffect } from "react";
 import { ErrorResponse } from "types/api";
-import { apiClient } from ".";
+import { apiClient } from "../../libs/apiClient";
 
-interface WithAxiosErrorHandlerProps {
+interface AxiosErrorHandleProviderProps {
   children: ReactNode;
 }
-export const WithAxiosErrorHandler: FC<WithAxiosErrorHandlerProps> = memo(
-  ({ children }: WithAxiosErrorHandlerProps) => {
+export const AxiosErrorHandleProvider: FC<AxiosErrorHandleProviderProps> = memo(
+  ({ children }: AxiosErrorHandleProviderProps) => {
     const setFlash = flashActions.setFlash();
 
     useEffect(() => {
@@ -38,4 +38,4 @@ export const WithAxiosErrorHandler: FC<WithAxiosErrorHandlerProps> = memo(
   }
 );
 
-WithAxiosErrorHandler.displayName = "WithAxiosErrorHandler";
+AxiosErrorHandleProvider.displayName = "AxiosErrorHandleProvider";
