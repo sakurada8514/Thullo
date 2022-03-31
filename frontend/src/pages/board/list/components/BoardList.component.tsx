@@ -5,6 +5,7 @@ import { BaseButton } from "components/ui/button/BaseButton";
 import { Link } from "react-router-dom";
 import { Board } from "models/board";
 import { Avatar } from "components/model/user/Avatar";
+import { BarsLoading } from "components/ui/loading/BarsLoading";
 import { useBoardListPresenter } from "./BoardList.presenter";
 
 interface BoardListProps {
@@ -69,7 +70,9 @@ export const BoardList: FC<BoardListProps> = memo(
                   </Link>
                 ))
               ) : (
-                <div> load</div>
+                <div className="col-span-4 flex justify-center pt-8">
+                  <BarsLoading />
+                </div>
               )}
             </div>
           </div>
