@@ -26,4 +26,9 @@ public class BoardService {
         List<Board> boardList = boardRepository.findBoardListByUserId(userId);
         return new BoardListResponse(boardList);
     }
+
+    public BoardListResponse publicList() {
+        List<Board> boardList = boardRepository.findBoardListByPublic();
+        return new BoardListResponse(boardList);
+    }
 }

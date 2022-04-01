@@ -15,4 +15,7 @@ public interface BoardMapper {
     Boolean insertBoardMember(@Param("boardId") Long boardId, @Param("userId") Long userId);
 
     List<Board> selectBoardListByUserId(Long userId);
+
+    List<Board> selectBoardListByPublic();
+
 }

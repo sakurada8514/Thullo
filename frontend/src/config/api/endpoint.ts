@@ -4,4 +4,5 @@ export const ENDPOINT = {
   PRINCIPAL_USER: "/user/principal",
   BOARD_CREATE: "/board/create",
   FETCH_MY_BOARD_LIST: "/board/list/my",
+  FETCH_PUBLIC_BOARD_LIST: "/board/list/public",
 };

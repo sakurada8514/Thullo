@@ -12,3 +12,8 @@ export const fetchMyBoardList = (): Promise<Board[]> =>
   apiClient
     .get(ENDPOINT.FETCH_MY_BOARD_LIST)
     .then((_res) => _res.data.boardList);
+
+export const fetchPublicBoardList = (): Promise<Board[]> =>
+  apiClient
+    .get(ENDPOINT.FETCH_PUBLIC_BOARD_LIST)
+    .then((_res) => _res.data.boardList);

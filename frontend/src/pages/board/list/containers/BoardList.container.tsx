@@ -3,7 +3,9 @@ import { BoardList } from "../components";
 import { useBoardList } from "./BoardList.hook";
 
 export const BoardListContainer = memo(() => {
-  const { myBoardList } = useBoardList();
-  return <BoardList myBoardList={myBoardList} />;
+  const { myBoardList, publicBoardList } = useBoardList();
+  return (
+    <BoardList myBoardList={myBoardList} publicBoardList={publicBoardList} />
+  );
 });
 BoardListContainer.displayName = "BoardListContainer";

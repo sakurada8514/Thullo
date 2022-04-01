@@ -17,7 +17,7 @@
         </collection>
     </resultMap>
 
-    <select id="selectBoardListByUserId" resultMap="board">
+    <sql id="selectBoardSql">
         SELECT
             b.id
             ,b.board_name
@@ -32,10 +32,6 @@
         FROM
             boards AS b
         JOIN
-            users_boards AS ub
-            ON b.id = ub.board_id
-            AND ub.user_id = #{userId}
-        JOIN
             users_boards AS ub_member
             ON b.id = ub_member.board_id
         JOIN
@@ -44,6 +40,18 @@
         LEFT JOIN
             user_icons AS ui
             ON u.id = ui.user_id
+    </sql>
+    <select id="selectBoardListByUserId" resultMap="board">
+        <include refid="selectBoardSql" />
+        JOIN
+            users_boards AS ub
+            ON b.id = ub.board_id
+            AND ub.user_id = #{userId}
+    </select>
+    <select id="selectBoardListByPublic" resultMap="board">
+        <include refid="selectBoardSql" />
+        WHERE
+            b.public_scope_type = 1
     </select>
     <insert id="insertBoard" parameterType="com.example.backend.domain.model.board.Board" useGeneratedKeys="true" keyProperty="id">
         INSERT IGNORE INTO boards

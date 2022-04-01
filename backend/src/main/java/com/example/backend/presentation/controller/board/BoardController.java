@@ -35,4 +35,9 @@ public class BoardController extends AbstractController {
     public ResponseEntity<BoardListResponse> list(@AuthenticationPrincipal PrincipalUser principalUser) {
         return successResponseEntity(boardService.list(principalUser.user().getId()));
     }
+
+    @GetMapping("/list/public")
+    public ResponseEntity<BoardListResponse> publicList() {
+        return successResponseEntity(boardService.publicList());
+    }
 }

@@ -11,4 +11,7 @@ public interface BoardRepository {
     public Long creartBoard(Board board);
 
     public List<Board> findBoardListByUserId(Long principalUserId);
+
+    public List<Board> findBoardListByPublic();
+
 }
