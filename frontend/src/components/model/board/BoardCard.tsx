@@ -1,6 +1,6 @@
 import { OverCountText } from "components/ui/text/OverCountText";
 import { Board, BoardMember } from "models/board";
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Avatar } from "../user/Avatar";
 
@@ -12,16 +12,23 @@ interface BoardCardProps {
 
 export const BoardCard: FC<BoardCardProps> = memo(
   ({ board }: BoardCardProps) => {
-    const sliceThreeMember = (members: BoardMember[]): BoardMember[] =>
-      members.slice(0, MEMBER_DISPLAY_COUNT);
-    const calcOverMemberCount = (members: BoardMember[]): number | null => {
-      if (members.length <= MEMBER_DISPLAY_COUNT) return null;
-      return members.length - MEMBER_DISPLAY_COUNT;
-    };
+    const sliceThreeMember = useCallback(
+      (members: BoardMember[]): BoardMember[] =>
+        members.slice(0, MEMBER_DISPLAY_COUNT),
+      [board]
+    );
+
+    const calcOverMemberCount = useCallback(
+      (members: BoardMember[]): number | null => {
+        if (members.length <= MEMBER_DISPLAY_COUNT) return null;
+        return members.length - MEMBER_DISPLAY_COUNT;
+      },
+      [board]
+    );
 
     return (
       <Link
-        to={`board/${board.id}`}
+        to={`/board/${board.id}`}
         key={board.id}
         className="col-span-4 cursor-pointer sm:col-span-2 lg:col-span-1"
       >
