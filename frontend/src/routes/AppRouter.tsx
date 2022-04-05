@@ -3,6 +3,7 @@ import { SignUpPage } from "pages/auth/signUp";
 import { SignInPage } from "pages/auth/signIn";
 import { BoardListPage } from "pages/board/list";
 import { BoardCreatePage } from "pages/board/create";
+import { BoardDetailPage } from "pages/board/detail";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 
@@ -27,6 +28,10 @@ export const AppRouter = () => {
         <Route
           path="/board/list"
           element={<PrivateRoute element={<BoardListPage />} />}
+        />
+        <Route
+          path="/board/:id"
+          element={<PrivateRoute element={<BoardDetailPage />} />}
         />
         <Route
           path="/board/create"
