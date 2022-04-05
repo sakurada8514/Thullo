@@ -3,6 +3,7 @@ import { FC } from "react";
 import { usePrincipalUser } from "utils/hooks/usePrincipalUser";
 import { FlashAlertProvider } from "components/provider/FlashAlertProvider";
 import { BarsLoading } from "components/ui/loading/BarsLoading";
+import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./routes/AppRouter";
 
 export const App: FC = () => {
@@ -19,7 +20,9 @@ export const App: FC = () => {
     <>
       <FlashAlertProvider>
         <AxiosErrorHandleProvider>
-          <AppRouter />
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
         </AxiosErrorHandleProvider>
       </FlashAlertProvider>
     </>
