@@ -14,4 +14,6 @@ public interface BoardRepository {
 
     public List<Board> findBoardListByPublic();
 
+    public Board findBoardById(Long id);
+
 }

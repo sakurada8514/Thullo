@@ -18,4 +18,5 @@ public interface BoardMapper {
 
     List<Board> selectBoardListByPublic();
 
+    Board selectBoardById(Long id);
 }

@@ -33,4 +33,9 @@ public class BoardDatasource implements BoardRepository {
     public List<Board> findBoardListByPublic() {
         return boardMapper.selectBoardListByPublic();
     }
+
+    @Override
+    public Board findBoardById(Long id) {
+        return boardMapper.selectBoardById(id);
+    }
 }

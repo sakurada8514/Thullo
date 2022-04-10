@@ -53,6 +53,11 @@
         WHERE
             b.public_scope_type = 1
     </select>
+    <select id="selectBoardById" resultMap="board">
+        <include refid="selectBoardSql" />
+        WHERE
+            b.id = #{id}
+    </select>
     <insert id="insertBoard" parameterType="com.example.backend.domain.model.board.Board" useGeneratedKeys="true" keyProperty="id">
         INSERT IGNORE INTO boards
         (

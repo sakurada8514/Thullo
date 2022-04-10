@@ -5,11 +5,13 @@ import com.example.backend.domain.model.user.PrincipalUser;
 import com.example.backend.presentation.controller.AbstractController;
 import com.example.backend.presentation.view.request.board.BoardRequest;
 import com.example.backend.presentation.view.response.board.BoardCreateSuccessResponse;
+import com.example.backend.presentation.view.response.board.BoardDetailResponse;
 import com.example.backend.presentation.view.response.board.BoardListResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,5 +41,10 @@ public class BoardController extends AbstractController {
     @GetMapping("/list/public")
     public ResponseEntity<BoardListResponse> publicList() {
         return successResponseEntity(boardService.publicList());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardDetailResponse> detail(@PathVariable("id") Long id) {
+        return successResponseEntity(boardService.detail(id));
     }
 }
