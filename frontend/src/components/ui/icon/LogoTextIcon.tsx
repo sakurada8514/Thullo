@@ -1,4 +1,4 @@
-import Icon from "images/Logo-small.svg";
+import Icon from "images/Logo.svg";
 import { FC, memo } from "react";
 
 const SIZE_CLASSES = {
@@ -11,8 +11,8 @@ interface Props {
   size?: "sm" | "md" | "lg";
 }
 
-export const LogoIcon: FC<Props> = memo(({ size = "md" }: Props) => (
+export const LogoTextIcon: FC<Props> = memo(({ size = "md" }: Props) => (
   <img src={Icon} alt="" className={SIZE_CLASSES[size]} />
 ));
 
-LogoIcon.displayName = "LogoIcon";
+LogoTextIcon.displayName = "LogoTextIcon";

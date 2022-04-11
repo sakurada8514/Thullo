@@ -3,17 +3,19 @@ import { FC, ReactNode } from "react";
 
 interface BaseLayoutProps {
   children: ReactNode;
+  boardName?: string;
   withOutHeader?: boolean;
   withOutFooter?: boolean;
 }
 
 export const BaseLayout: FC<BaseLayoutProps> = ({
   children,
+  boardName,
   withOutHeader = false,
   withOutFooter = false,
 }) => (
   <div className=" flex min-h-screen flex-col justify-between">
-    {!withOutHeader && <BaseHeader />}
+    {!withOutHeader && <BaseHeader boardName={boardName} />}
     <main className="flex-grow bg-blue-50">{children}</main>
     {!withOutFooter && (
       <footer className="bg-blue-50">

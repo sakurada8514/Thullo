@@ -19,10 +19,10 @@ export const fetchPublicBoardList = (): Promise<Board[]> =>
     .get(ENDPOINT.FETCH_PUBLIC_BOARD_LIST)
     .then((_res) => _res.data.boardList);
 
-export const fetchBoardDetail = (_: string, id: string) => {
+export const fetchBoardDetail = (_: string, id: string): Promise<Board> => {
   console.log(replaceUrlParam(ENDPOINT.FETCH_BOARD_DETAIL, { id }));
 
   return apiClient
     .get(replaceUrlParam(ENDPOINT.FETCH_BOARD_DETAIL, { id }))
-    .then((_res) => _res.data.boardList);
+    .then((_res) => _res.data.board);
 };

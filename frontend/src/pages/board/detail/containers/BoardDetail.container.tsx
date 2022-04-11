@@ -8,6 +8,6 @@ interface Props {
 
 export const BoardDetailContainer: FC<Props> = memo(({ id }: Props) => {
   const { boardDetail } = useBoardDetail({ id });
-  return <BoardDetail />;
+  return <BoardDetail boardDetail={boardDetail} />;
 });
 BoardDetailContainer.displayName = "BoardDetailContainer";
