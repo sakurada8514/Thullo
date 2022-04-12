@@ -15,7 +15,6 @@ interface BaseHeaderProps {
 export const BaseHeader: FC<BaseHeaderProps> = memo(
   ({ boardName }: BaseHeaderProps) => {
     const user = userSelectors.userInfo();
-    console.log(boardName);
 
     return (
       <header className="overflow-hidden">
@@ -32,7 +31,7 @@ export const BaseHeader: FC<BaseHeaderProps> = memo(
                 <p className="pr-2 font-bold">Board Name</p>
                 <Link
                   to="/board/list"
-                  className="ml-2 flex rounded-lg bg-gray-300 p-1 text-gray-100 lg:p-2"
+                  className="ml-2 flex rounded-lg bg-gray-300 p-1 text-gray-500 lg:p-2"
                 >
                   <GridIcon />
                   <span className="hidden lg:ml-2 lg:block">All board</span>

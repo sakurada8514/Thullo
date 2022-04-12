@@ -24,7 +24,7 @@ export const Avatar: FC<AvatarProps> = memo(
             alt="icon"
           />
         ) : (
-          <p className="h-6 w-6 text-center text-white">{iconName}</p>
+          <p className="h-6 w-6 text-center text-gray-500">{iconName}</p>
         )}
       </div>
     );
