@@ -1,6 +1,5 @@
 import { VALIDATE_MESSAGE } from "config/error";
 import { useFormik } from "formik";
-import { userSelectors } from "globalState/user";
 import {
   BoardCreateFormValue,
   BoardCreateRequest,

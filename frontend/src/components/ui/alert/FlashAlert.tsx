@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { flashActions, flashSelectors } from "globalState/flash";
 import { memo, ReactNode, useEffect } from "react";
 import { CrossIcon } from "../icon/CrossIcon";
 import { InfoIcon } from "../icon/InfoIcon";
@@ -17,23 +16,22 @@ const TYPE_HEAD = {
   error: "Error !",
 } as { [key: string]: string };
 
-export const FlashAlert = memo(() => {
-  const flashInfo = flashSelectors.flashInfo();
-  const resetFlash = flashActions.resetFlash();
-  const handleClose = () => {
-    resetFlash();
-  };
-  useEffect(() => {
-    if (flashInfo) {
-      setTimeout(() => {
-        resetFlash();
-      }, 3000);
-    }
-  }, [flashInfo]);
+export const FlashAlert = memo(() => (
+  // const flashInfo = flashSelectors.flashInfo();
+  // const resetFlash = flashActions.resetFlash();
+  // const handleClose = () => {
+  //   resetFlash();
+  // };
+  // useEffect(() => {
+  //   if (flashInfo) {
+  //     setTimeout(() => {
+  //       resetFlash();
+  //     }, 3000);
+  //   }
+  // }, [flashInfo]);
 
-  return (
-    <>
-      {flashInfo ? (
+  <>
+    {/* {flashInfo ? (
         <div
           className={clsx(
             "fixed left-1/2 bottom-4 w-11/12 max-w-md -translate-x-1/2 rounded-b border-t-4 px-4 py-3 shadow-md transition md:left-4 md:-translate-x-0",
@@ -56,9 +54,8 @@ export const FlashAlert = memo(() => {
             </div>
           </div>
         </div>
-      ) : null}
-    </>
-  );
-});
+      ) : null} */}
+  </>
+));
 
 FlashAlert.displayName = "FlashAlert";
