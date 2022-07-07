@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { memo, ReactNode, useEffect } from "react";
+import { FlashContext } from "components/provider/FlashAlertProvider";
+import { memo, ReactNode, useContext, useEffect } from "react";
 import { CrossIcon } from "../icon/CrossIcon";
 import { InfoIcon } from "../icon/InfoIcon";
 
@@ -16,35 +17,36 @@ const TYPE_HEAD = {
   error: "Error !",
 } as { [key: string]: string };
 
-export const FlashAlert = memo(() => (
-  // const flashInfo = flashSelectors.flashInfo();
-  // const resetFlash = flashActions.resetFlash();
-  // const handleClose = () => {
-  //   resetFlash();
-  // };
-  // useEffect(() => {
-  //   if (flashInfo) {
-  //     setTimeout(() => {
-  //       resetFlash();
-  //     }, 3000);
-  //   }
-  // }, [flashInfo]);
+export const FlashAlert = memo(() => {
+  const { flash, resetFlash } = useContext(FlashContext);
+  const handleClose = () => {
+    resetFlash();
+  };
+  useEffect(() => {
+    if (flash) {
+      setTimeout(() => {
+        resetFlash();
+      }, 3000);
+    }
+  }, [flash]);
 
-  <>
-    {/* {flashInfo ? (
+  return (
+    <>
+      {typeof flash.message !== "undefined" &&
+      typeof flash.type !== "undefined" ? (
         <div
           className={clsx(
             "fixed left-1/2 bottom-4 w-11/12 max-w-md -translate-x-1/2 rounded-b border-t-4 px-4 py-3 shadow-md transition md:left-4 md:-translate-x-0",
-            TYPE_CLASSES[flashInfo.type]
+            TYPE_CLASSES[flash.type]
           )}
           role="alert"
         >
           <div className="flex justify-between">
             <div className="flex">
-              <div className="mr-4 py-1">{TYPE_ICON[flashInfo.type]}</div>
+              <div className="mr-4 py-1">{TYPE_ICON[flash.type]}</div>
               <div>
-                <p className="font-bold">{TYPE_HEAD[flashInfo.type]}</p>
-                <p className="text-sm">{flashInfo.message}</p>
+                <p className="font-bold">{TYPE_HEAD[flash.type]}</p>
+                <p className="text-sm">{flash.message}</p>
               </div>
             </div>
             <div className="ml-4">
@@ -54,8 +56,9 @@ export const FlashAlert = memo(() => (
             </div>
           </div>
         </div>
-      ) : null} */}
-  </>
-));
+      ) : null}
+    </>
+  );
+});
 
 FlashAlert.displayName = "FlashAlert";
