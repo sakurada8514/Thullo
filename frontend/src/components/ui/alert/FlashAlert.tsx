@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FlashContext } from "components/provider/FlashAlertProvider";
+import { useFlashContext } from "components/provider/FlashAlertProvider";
 import { memo, ReactNode, useContext, useEffect } from "react";
 import { CrossIcon } from "../icon/CrossIcon";
 import { InfoIcon } from "../icon/InfoIcon";
@@ -18,7 +18,7 @@ const TYPE_HEAD = {
 } as { [key: string]: string };
 
 export const FlashAlert = memo(() => {
-  const { flash, resetFlash } = useContext(FlashContext);
+  const { flash, resetFlash } = useContext(useFlashContext().FlashContext);
   const handleClose = () => {
     resetFlash();
   };

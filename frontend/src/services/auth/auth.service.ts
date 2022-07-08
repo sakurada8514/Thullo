@@ -10,18 +10,12 @@ export const signUp = (
 ): Promise<SuccessResponse> =>
   apiClient.post(ENDPOINT.SIGN_UP, requestBody).then(() =>
     apiClient
-      .post(
-        ENDPOINT.SIGN_IN,
-        encodeURI(
-          `email=${requestBody.email}&password=${requestBody.password}`
-        ),
-        {
-          headers: {
-            "content-type": "application/x-www-form-urlencoded",
-          },
-        }
-      )
-      .then((_res: AxiosResponse<SuccessResponse>) => _res.data)
+      .post(ENDPOINT.SIGN_IN, requestBody)
+      .then((_res: AxiosResponse<SuccessResponse>) => {
+        console.log(_res);
+
+        return _res.data;
+      })
   );
 
 export const signIn = (

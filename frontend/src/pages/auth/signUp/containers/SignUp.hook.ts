@@ -11,8 +11,6 @@ export const useSignUp = () => {
     async (reqest: UserSignUpRequest) => {
       signUp(reqest)
         .then(async () => {
-          // const user = await fetchPrincipalUser();
-          // setUser(user);
           navigate("/board/list");
         })
         .catch((_e) => {

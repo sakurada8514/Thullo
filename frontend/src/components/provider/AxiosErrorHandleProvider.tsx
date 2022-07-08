@@ -12,10 +12,10 @@ export const AxiosErrorHandleProvider: FC<AxiosErrorHandleProviderProps> = memo(
       apiClient.interceptors.response.use(
         (response) => response,
         async (error) => {
+          console.log(error);
           switch (error.response?.status) {
-            case 400:
-            case 401:
-              return Promise.reject<ErrorResponse>(error.response?.data);
+            case 422:
+              return Promise.reject<ErrorResponse>(error.response);
             case 403:
               window.location.href = "/signin";
               return false;
