@@ -1,4 +1,6 @@
 class Auth::RegistrationsController < DeviseTokenAuth::RegistrationsController
+  include Auth::JoinToken
+
   private
 
   def sign_up_params
