@@ -1,5 +1,11 @@
 export interface SuccessResponse {
-  success: boolean;
+  data: {
+    email: string;
+    id: number;
+    name: string;
+    provider: string;
+    uid: string;
+  };
 }
 
 export interface ErrorResponse {

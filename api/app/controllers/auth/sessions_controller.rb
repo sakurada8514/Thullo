@@ -1,3 +1,3 @@
 class Auth::SessionsController < DeviseTokenAuth::SessionsController
-  include Autn::JoinToken
+  include Auth::JoinToken
 end

@@ -1,5 +1,6 @@
 import { UserSignUpRequest } from "models";
 import { useCallback, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "services";
 
@@ -10,11 +11,11 @@ export const useSignUp = () => {
   const doSignUp = useCallback(
     async (reqest: UserSignUpRequest) => {
       signUp(reqest)
-        .then(async () => {
+        .then(() => {
           navigate("/board/list");
         })
         .catch((_e) => {
-          setErrorMessage(_e.message);
+          setErrorMessage(_e.errors.full_messages[0]);
         });
     },
     [navigate, errorMessage]

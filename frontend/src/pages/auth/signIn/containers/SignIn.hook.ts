@@ -11,12 +11,10 @@ export const useSignIn = () => {
     async (reqest: UserSignInRequest) => {
       signIn(reqest)
         .then(async () => {
-          // const user = await fetchPrincipalUser();
-          // setUser(user);
           navigate("/board/list");
         })
         .catch((_e) => {
-          setErrorMessage(_e.message);
+          setErrorMessage(_e.errors.full_messages[0]);
         });
     },
     [navigate, errorMessage]
