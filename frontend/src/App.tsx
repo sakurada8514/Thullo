@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { AxiosErrorHandleProvider } from "components/provider/AxiosErrorHandleProvider";
 import { FC } from "react";
 import { FlashAlertProvider } from "components/provider/FlashAlertProvider";
