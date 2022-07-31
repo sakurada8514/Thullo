@@ -1,15 +1,14 @@
 import { MESSAGE } from "config/error/message";
 import { FC, memo, ReactNode, useEffect } from "react";
 import { ErrorResponse } from "types/api";
+import { toast } from "react-toastify";
 import { apiClient } from "../../libs/apiClient";
-import { useFlashContext } from "./FlashAlertProvider";
 
 interface AxiosErrorHandleProviderProps {
   children: ReactNode;
 }
 export const AxiosErrorHandleProvider: FC<AxiosErrorHandleProviderProps> = memo(
   ({ children }: AxiosErrorHandleProviderProps) => {
-    const { setFlash } = useFlashContext();
     useEffect(() => {
       apiClient.interceptors.response.use(
         (response) => response,
@@ -22,7 +21,7 @@ export const AxiosErrorHandleProvider: FC<AxiosErrorHandleProviderProps> = memo(
             case 422:
               return Promise.reject<ErrorResponse>(error.response?.data);
             case 500:
-              setFlash({ type: "error", message: MESSAGE.serverError });
+              toast.error(MESSAGE.serverError);
               return Promise.reject<ErrorResponse>(error.response?.data);
             default:
               return Promise.reject<ErrorResponse>(error.response?.data);

@@ -14,7 +14,7 @@ export const useSignIn = () => {
           navigate("/board/list");
         })
         .catch((_e) => {
-          setErrorMessage(_e.errors.full_messages[0]);
+          setErrorMessage(_e.errors[0]);
         });
     },
     [navigate, errorMessage]
