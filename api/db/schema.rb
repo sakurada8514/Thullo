@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_28_145054) do
+ActiveRecord::Schema.define(version: 2022_07_31_074958) do
 
   create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "workspaces_id", null: false
@@ -22,6 +22,67 @@ ActiveRecord::Schema.define(version: 2022_07_28_145054) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_user_id"], name: "fk_rails_887ce4c701"
     t.index ["workspaces_id"], name: "index_boards_on_workspaces_id"
+  end
+
+  create_table "card_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "cards_id", null: false
+    t.bigint "users_id", null: false
+    t.string "comment", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cards_id"], name: "index_card_comments_on_cards_id"
+    t.index ["users_id"], name: "index_card_comments_on_users_id"
+  end
+
+  create_table "card_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "cards_id", null: false
+    t.string "file_src", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cards_id"], name: "index_card_files_on_cards_id"
+  end
+
+  create_table "card_labels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "master_label_colors_id", null: false
+    t.bigint "boards_id", null: false
+    t.string "label_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["boards_id"], name: "index_card_labels_on_boards_id"
+    t.index ["master_label_colors_id"], name: "index_card_labels_on_master_label_colors_id"
+  end
+
+  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "lists_id", null: false
+    t.bigint "admin_user_id", null: false
+    t.string "title", null: false
+    t.string "description"
+    t.string "image"
+    t.datetime "start_date"
+    t.datetime "deadline_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_user_id"], name: "fk_rails_9c78d3b22d"
+    t.index ["lists_id"], name: "index_cards_on_lists_id"
+  end
+
+  create_table "cards_labels", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "card_label_id", null: false
+    t.bigint "card_id", null: false
+  end
+
+  create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "boards_id", null: false
+    t.string "list_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["boards_id"], name: "index_lists_on_boards_id"
+  end
+
+  create_table "master_label_colors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "color_code", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "user_icons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -60,6 +121,11 @@ ActiveRecord::Schema.define(version: 2022_07_28_145054) do
     t.bigint "user_id", null: false
   end
 
+  create_table "users_cards", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.bigint "user_id", null: false
+  end
+
   create_table "users_workspaces", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "workspace_id", null: false
@@ -74,5 +140,13 @@ ActiveRecord::Schema.define(version: 2022_07_28_145054) do
 
   add_foreign_key "boards", "users", column: "admin_user_id"
   add_foreign_key "boards", "workspaces", column: "workspaces_id"
+  add_foreign_key "card_comments", "cards", column: "cards_id"
+  add_foreign_key "card_comments", "users", column: "users_id"
+  add_foreign_key "card_files", "cards", column: "cards_id"
+  add_foreign_key "card_labels", "boards", column: "boards_id"
+  add_foreign_key "card_labels", "master_label_colors", column: "master_label_colors_id"
+  add_foreign_key "cards", "lists", column: "lists_id"
+  add_foreign_key "cards", "users", column: "admin_user_id"
+  add_foreign_key "lists", "boards", column: "boards_id"
   add_foreign_key "user_icons", "users", column: "users_id"
 end

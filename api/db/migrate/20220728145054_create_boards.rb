@@ -13,3 +13,4 @@ class CreateBoards < ActiveRecord::Migration[6.0]
     create_join_table :boards, :users, table_name: :users_boards
   end
 end
+# rails generate migration CreateCardFiles cards:references file_src:string
