@@ -15,7 +15,8 @@ export const useSignUp = () => {
           navigate("/board/list");
         })
         .catch((_e) => {
-          setErrorMessage(_e.errors.full_messages[0]);
+          // バリデーションなどのえらー対応
+          // setErrorMessage(_e.errors.full_messages[0]);
         });
     },
     [navigate, errorMessage]

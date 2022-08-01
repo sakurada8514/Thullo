@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_31_074958) do
+ActiveRecord::Schema.define(version: 2022_08_01_141934) do
 
   create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "workspaces_id", null: false
     t.bigint "admin_user_id", null: false
     t.string "board_name", null: false
     t.string "board_description"
     t.integer "public_scope_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
     t.index ["admin_user_id"], name: "fk_rails_887ce4c701"
-    t.index ["workspaces_id"], name: "index_boards_on_workspaces_id"
   end
 
   create_table "card_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -139,7 +138,6 @@ ActiveRecord::Schema.define(version: 2022_07_31_074958) do
   end
 
   add_foreign_key "boards", "users", column: "admin_user_id"
-  add_foreign_key "boards", "workspaces", column: "workspaces_id"
   add_foreign_key "card_comments", "cards", column: "cards_id"
   add_foreign_key "card_comments", "users", column: "users_id"
   add_foreign_key "card_files", "cards", column: "cards_id"

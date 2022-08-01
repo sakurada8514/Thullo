@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::Cookies
   before_action :split_token
+  # before_action :authenticate_user!
 
   private
 

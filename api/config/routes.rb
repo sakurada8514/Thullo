@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     sessions: 'auth/sessions'
   }
 
-  resources :users
-  get 'sign_in_user' => 'users#sign_in_user'
+  namespace :api do
+    namespace :v1 do
+      resources :users
+      get 'sign_in_user' => 'users#sign_in_user'
+      resources :boards, only: %i[index update show create]
+    end
+  end
 end
