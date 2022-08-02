@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       get 'sign_in_user' => 'users#sign_in_user'
-      resources :boards, only: %i[index update show create]
+      resources :boards, only: %i[index update show create] do
+        collection do
+          get 'public'
+        end
+      end
     end
   end
 end

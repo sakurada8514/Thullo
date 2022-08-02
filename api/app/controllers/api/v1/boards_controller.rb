@@ -4,6 +4,11 @@ class Api::V1::BoardsController < ApplicationController
     render json: boards
   end
 
+  def public
+    boards = Board.published.not_joined(current_user.id).includes(:users)
+    render json: boards
+  end
+
   def show; end
 
   def create
@@ -12,6 +17,8 @@ class Api::V1::BoardsController < ApplicationController
   end
 
   def update; end
+
+  private
 
   def board_params
     params.require(:board)
