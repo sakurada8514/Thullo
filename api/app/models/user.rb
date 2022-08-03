@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
 
   has_many :users_boards
   has_many :boards, through: :users_boards
+  has_one :icon, class_name: 'UserIcon'
 end

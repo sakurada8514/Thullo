@@ -34,12 +34,12 @@ export const BoardDetail: FC<BoardDetailProps> = memo(
                 </p>
               </div>
               <div className="ml-2 flex lg:ml-6">
-                {boardDetail.members.map((member) => (
+                {boardDetail.users.map((user) => (
                   <Avatar
                     classes="mx-1"
-                    key={member.id}
-                    name={member.name}
-                    icon={member.icon}
+                    key={user.id}
+                    name={user.name}
+                    icon={user.icon}
                   />
                 ))}
                 <BaseButton classes="py-2 px-2 ml-2">

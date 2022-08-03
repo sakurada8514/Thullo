@@ -13,7 +13,7 @@ export interface Board {
   image: string;
   adminUserId: number;
   publicScopeType: PublicScopeType;
-  members: BoardMember[];
+  users: BoardMember[];
 }
 
 export interface BoardMember {

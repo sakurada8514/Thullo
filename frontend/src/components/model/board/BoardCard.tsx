@@ -42,16 +42,16 @@ export const BoardCard: FC<BoardCardProps> = memo(
           />
           <p className="mb-3 text-lg font-bold">{board.boardName}</p>
           <div className="grid grid-cols-7 gap-1 lg:grid-cols-5">
-            {sliceThreeMember(board.members).map((member) => (
+            {sliceThreeMember(board.users).map((user) => (
               <Avatar
-                key={member.id}
-                name={member.name}
-                icon={member.icon}
+                key={user.id}
+                name={user.name}
+                icon={user.icon}
                 classes="col-span-1"
               />
             ))}
             <div className="col-span-2 flex items-center">
-              <OverCountText overCount={calcOverMemberCount(board.members)} />
+              <OverCountText overCount={calcOverMemberCount(board.users)} />
             </div>
           </div>
         </div>
