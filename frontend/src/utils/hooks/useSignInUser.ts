@@ -6,7 +6,6 @@ export const useSignInUser = () => {
   const {
     data: signInUser,
     error,
-    isValidating,
     mutate,
   } = useSWR(SWR_KEYS.FATCH_SIGN_IN_USER, fetchSignInUser, {
     shouldRetryOnError: false,
@@ -18,5 +17,7 @@ export const useSignInUser = () => {
 
   const isAuthd = typeof signInUser !== "undefined";
 
-  return { signInUser, isValidating, isAuthd, mutate };
+  const isLoading = !signInUser && !error;
+
+  return { signInUser, isLoading, isAuthd, mutate };
 };

@@ -6,9 +6,9 @@ interface PrivateRouteProps {
   element: JSX.Element;
 }
 export const PrivateRoute: FC<PrivateRouteProps> = ({ element }) => {
-  const { isAuthd, isValidating } = useSignInUser();
+  const { isAuthd, isLoading } = useSignInUser();
 
-  if (isValidating) return <p>loading</p>;
+  if (isLoading) return <p>loading</p>;
 
   return isAuthd ? element : <Navigate to="/signin" />;
 };

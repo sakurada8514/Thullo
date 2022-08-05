@@ -1,19 +1,19 @@
 class Api::V1::BoardsController < ApplicationController
   def index
     boards = current_user.boards.preload(:users)
-    render json: boards
+    render json: boards, include: { users: [:icon] }
   end
 
   def public
     boards = Board.published.not_joined(current_user.id).preload(:users)
-    render json: boards
+    render json: boards, include: { users: [:icon] }
   end
 
   def show; end
 
   def create
     board = Board.create!(board_params)
-    render json: board
+    render json: board, include: { users: [:icon] }
   end
 
   def update; end

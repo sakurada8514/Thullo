@@ -1,10 +1,10 @@
 import { User } from "models/user";
 
 export const PUBLIC_SCOPE_TYPE = {
-  0: "Private",
-  1: "Public",
+  only_member: "Private",
+  published: "Public",
 } as { [key: string]: string };
-type PublicScopeType = "0" | "1";
+type PublicScopeType = "only_member" | "published";
 
 export interface Board {
   id: number;
