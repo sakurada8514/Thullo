@@ -20,7 +20,7 @@ export const useBoardCreatePresenter = ({ initImage, doCreateBoard }: Args) => {
     () =>
       ({
         boardName: "",
-        boardDiscription: "",
+        boardDescription: "",
         publicScopeType: "only_member",
         image: initImage,
       } as BoardCreateFormValue),
@@ -33,7 +33,7 @@ export const useBoardCreatePresenter = ({ initImage, doCreateBoard }: Args) => {
         boardName: Yup.string()
           .max(256, VALIDATE_MESSAGE.LENGTH_MAX(256))
           .required(VALIDATE_MESSAGE.REQUIRED("ボード名")),
-        boardDiscription: Yup.string().required(
+        boardDescription: Yup.string().required(
           VALIDATE_MESSAGE.REQUIRED("ボード説明")
         ),
         publicScopeType: Yup.string().required(

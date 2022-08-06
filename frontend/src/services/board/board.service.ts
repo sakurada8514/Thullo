@@ -20,5 +20,5 @@ export const fetchBoardDetail = (_: string, id: string): Promise<Board> => {
 
   return apiClient
     .get(replaceUrlParam(ENDPOINT.FETCH_BOARD_DETAIL, { id }))
-    .then((_res) => _res.data.board);
+    .then((_res) => _res.data);
 };

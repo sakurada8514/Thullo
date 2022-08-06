@@ -9,7 +9,7 @@ type PublicScopeType = "only_member" | "published";
 export interface Board {
   id: number;
   boardName: string;
-  boardDiscription: string;
+  boardDescription: string;
   image: string;
   adminUserId: number;
   publicScopeType: PublicScopeType;
@@ -24,13 +24,13 @@ export interface BoardMember {
 
 export interface BoardCreateFormValue {
   boardName: string;
-  boardDiscription: string;
+  boardDescription: string;
   image: string;
   publicScopeType: PublicScopeType;
 }
 export interface BoardCreateRequest {
   boardName: string;
-  boardDiscription: string;
+  boardDescription: string;
   image: string;
   publicScopeType: PublicScopeType;
 }
@@ -38,7 +38,7 @@ export interface BoardCreateRequest {
 export const toBoardCreateRequest = (values: BoardCreateFormValue) =>
   ({
     boardName: values.boardName,
-    boardDiscription: values.boardDiscription,
+    boardDescription: values.boardDescription,
     image: values.image,
     publicScopeType: values.publicScopeType,
   } as BoardCreateRequest);

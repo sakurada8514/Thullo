@@ -12,7 +12,7 @@ export const Avatar: FC<AvatarProps> = memo(
     return (
       <div
         className={clsx(
-          "h-8 w-8 rounded-lg bg-gray-300",
+          "h-9 w-9 rounded-lg bg-gray-300",
           !icon && "p-1",
           classes
         )}
@@ -24,7 +24,7 @@ export const Avatar: FC<AvatarProps> = memo(
             alt="icon"
           />
         ) : (
-          <p className="h-6 w-6 text-center text-gray-500">{iconName}</p>
+          <p className="h-full w-full text-center text-gray-500">{iconName}</p>
         )}
       </div>
     );

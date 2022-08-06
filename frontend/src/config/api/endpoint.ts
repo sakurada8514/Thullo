@@ -6,5 +6,5 @@ export const ENDPOINT = {
   BOARD_CREATE: `/api/${API_VERSION}/boards`,
   FETCH_MY_BOARD_LIST: `/api/${API_VERSION}/boards`,
   FETCH_PUBLIC_BOARD_LIST: `/api/${API_VERSION}/boards/public`,
-  FETCH_BOARD_DETAIL: "/board/:id",
+  FETCH_BOARD_DETAIL: `/api/${API_VERSION}/boards/:id`,
 };

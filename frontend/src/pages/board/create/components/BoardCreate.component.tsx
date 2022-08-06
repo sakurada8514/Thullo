@@ -59,14 +59,14 @@ export const BoardCreate: FC<BoardCreateProps> = memo(
           <div className="mb-3">
             <TextArea
               placeholder="Board Discription"
-              name="boardDiscription"
-              id="boardDiscription"
+              name="boardDescription"
+              id="boardDescription"
               formik={formik}
               rows={5}
             />
             <ValidationErrorMessage
-              touched={formik.touched.boardDiscription}
-              error={formik.errors.boardDiscription}
+              touched={formik.touched.boardDescription}
+              error={formik.errors.boardDescription}
             />
           </div>
           <div className="mb-6 w-3/5 md:w-1/2">

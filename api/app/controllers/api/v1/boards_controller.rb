@@ -9,7 +9,10 @@ class Api::V1::BoardsController < ApplicationController
     render json: boards, include: { users: [:icon] }
   end
 
-  def show; end
+  def show
+    board = Board.find(params[:id])
+    render json: board, include: { users: [:icon] }
+  end
 
   def create
     board = Board.create!(board_params)
