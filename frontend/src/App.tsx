@@ -7,11 +7,11 @@ import { AppRouter } from "./routes/AppRouter";
 
 export const App: FC = () => (
   <>
-    <AxiosErrorHandleProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AxiosErrorHandleProvider>
         <AppRouter />
-      </BrowserRouter>
-      <ToastContainer />
-    </AxiosErrorHandleProvider>
+        <ToastContainer />
+      </AxiosErrorHandleProvider>
+    </BrowserRouter>
   </>
 );
