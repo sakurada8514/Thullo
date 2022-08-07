@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const BoardDetailContainer: FC<Props> = memo(({ id }: Props) => {
-  const { boardDetail } = useBoardDetail({ id });
-  return <BoardDetail boardDetail={boardDetail} />;
+  const { boardDetail, doCreateList } = useBoardDetail({ id });
+  return <BoardDetail boardDetail={boardDetail} doCreateList={doCreateList} />;
 });
 BoardDetailContainer.displayName = "BoardDetailContainer";
