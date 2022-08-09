@@ -1,14 +1,16 @@
 export interface List {
   listName: string;
-  boardId: number;
+  boardsId: number;
 }
 
-export type ListFormValue = List;
+export interface ListFormValue {
+  listName: string;
+}
 
 export type ListCreateRequest = List;
 
-export const toListCreateRequest = (values: ListFormValue) =>
+export const toListCreateRequest = (values: ListFormValue, boardsId: number) =>
   ({
     listName: values.listName,
-    boardId: values.boardId,
+    boardsId,
   } as ListCreateRequest);

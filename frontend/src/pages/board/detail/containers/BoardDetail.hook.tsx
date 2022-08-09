@@ -16,7 +16,7 @@ export const useBoardDetail = ({ id }: Param) => {
   );
 
   const doCreateList = useCallback(async (reqest: ListCreateRequest) => {
-    createList(reqest).then((_res) => {
+    await createList(reqest).then((_res) => {
       mutate();
     });
   }, []);

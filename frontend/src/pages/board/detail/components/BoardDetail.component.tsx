@@ -36,7 +36,7 @@ export const BoardDetail: FC<BoardDetailProps> = memo(
       isLoading,
       handleShowListForm,
       handleCloseListForm,
-    } = useBoardDetailPresenter({ doCreateList, boardId: boardDetail?.id });
+    } = useBoardDetailPresenter({ doCreateList, boardsId: boardDetail?.id });
     return (
       <>
         {/* TODO:: ローディング実装 */}
