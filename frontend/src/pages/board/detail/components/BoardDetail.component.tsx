@@ -33,7 +33,6 @@ export const BoardDetail: FC<BoardDetailProps> = memo(
     const {
       listFormik,
       showListForm,
-      isLoading,
       handleShowListForm,
       handleCloseListForm,
     } = useBoardDetailPresenter({ doCreateList, boardsId: boardDetail?.id });
@@ -94,10 +93,7 @@ export const BoardDetail: FC<BoardDetailProps> = memo(
                           error={listFormik.errors.listName}
                         />
                         <div className="mt-2 flex">
-                          <BaseSubmitButton
-                            classes="flex items-center"
-                            isLoading={isLoading}
-                          >
+                          <BaseSubmitButton classes="flex items-center">
                             <span className="">Add</span>
                           </BaseSubmitButton>
                           <button

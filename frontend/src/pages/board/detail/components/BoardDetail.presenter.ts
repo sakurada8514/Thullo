@@ -1,18 +1,15 @@
 import { VALIDATE_MESSAGE } from "config/error";
-import { SWR_KEYS } from "config/swr";
 import {
   ListCreateRequest,
   ListFormValue,
   toListCreateRequest,
 } from "models/list/list.model";
-import { FC, useEffect, useMemo, useState } from "react";
-import { fetchBoardDetail } from "services";
-import useSWR from "swr";
+import { useContext, useMemo, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { MESSAGE } from "config/error/message";
 import { toast } from "react-toastify";
-import { hideLoading, showLoading } from "libs/loading";
+import { LoadingContext } from "components/provider/LoadingProvider";
 
 interface Args {
   doCreateList: (reqest: ListCreateRequest) => Promise<void>;
@@ -20,7 +17,7 @@ interface Args {
 }
 
 export const useBoardDetailPresenter = ({ doCreateList, boardsId }: Args) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setIsLoading } = useContext(LoadingContext);
   const [showListForm, setShowListForm] = useState<boolean>(false);
   const handleShowListForm = () => {
     setShowListForm(true);
@@ -47,14 +44,14 @@ export const useBoardDetailPresenter = ({ doCreateList, boardsId }: Args) => {
   );
 
   const handleSubmit = async (values: ListFormValue) => {
-    showLoading();
+    setIsLoading(true);
     if (typeof boardsId === "undefined") {
       toast.error(MESSAGE.serverError);
       return;
     }
     await doCreateList(toListCreateRequest(values, boardsId));
     setShowListForm(false);
-    hideLoading();
+    setIsLoading(false);
   };
 
   const listFormik = useFormik({
@@ -70,7 +67,6 @@ export const useBoardDetailPresenter = ({ doCreateList, boardsId }: Args) => {
   return {
     listFormik,
     showListForm,
-    isLoading,
     handleShowListForm,
     handleCloseListForm,
   };
